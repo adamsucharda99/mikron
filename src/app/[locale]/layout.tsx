@@ -1,3 +1,4 @@
+import '../globals.css';
 import ThemeRegistry from '@/components/ThemeRegistry';
 import { locales } from '@/i18n';
 import type { Metadata } from 'next';
