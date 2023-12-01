@@ -1,12 +1,12 @@
 'use client';
 
-import createCache from '@emotion/cache';
-import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider } from '@emotion/react';
-import { ThemeProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
-import { useState } from 'react';
 import { theme } from '@/theme/theme';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import CssBaseline from '@mui/joy/CssBaseline';
+import { ThemeProvider } from '@mui/joy/styles';
+import { useServerInsertedHTML } from 'next/navigation';
+import { useState } from 'react';
 
 // This implementation is from emotion-js
 // https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
