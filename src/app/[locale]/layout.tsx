@@ -1,10 +1,9 @@
-import '../globals.css';
-import ThemeRegistry from '@/components/ThemeRegistry';
 import { locales } from '@/i18n';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import { Providers } from '../providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,7 +28,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <ThemeRegistry options={{ key: 'joy' }}>{children}</ThemeRegistry>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
