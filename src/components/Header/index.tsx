@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import NavItem from './NavItem';
 import Link from 'next/link';
+import ProductMenu from './ProductMenu';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
@@ -112,7 +113,7 @@ export default function Header({ locale }: Props) {
         style={{ position: 'static' }}
         unmountOnExit
       >
-        <Flex bg='white' shadow='md' px={4} py={8} hideBelow='md'></Flex>
+        <ProductMenu locale={locale} />
       </Slide>
     </>
   );
