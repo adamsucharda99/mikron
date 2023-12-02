@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import { locales } from '@/i18n';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
@@ -28,7 +29,10 @@ export default function RootLayout({ children, params: { locale } }: Props) {
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header locale={locale} />
+          {children}
+        </Providers>
       </body>
     </html>
   );
