@@ -38,7 +38,7 @@ export default function NavItem({ children, href, variant, ...props }: Props) {
   return (
     <ListItem sx={variants[variant]} as={Link} href={href ?? ''} {...props}>
       <Text
-        fontSize={variant === 'desktop' ? 'lg' : 'md'}
+        fontSize={variant === 'desktop' ? 'xl' : 'md'}
         fontWeight='medium'
         color='gray.800'
       >

@@ -9,13 +9,15 @@ import {
   List,
   Slide,
   Text,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { Titillium_Web } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { MdMenu } from 'react-icons/md';
+import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
-import Link from 'next/link';
 import ProductMenu from './ProductMenu';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
@@ -27,6 +29,8 @@ interface Props {
 export default function Header({ locale }: Props) {
   const [navOpen, setNavOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+
+  const [isMobile] = useMediaQuery('(max-width: 48em)');
 
   return (
     <>
@@ -75,17 +79,20 @@ export default function Header({ locale }: Props) {
           />
 
           {/* Desktop nav */}
-          <List display='flex' flexDirection='row' gap={3} hideBelow='md'>
-            <NavItem
-              variant='desktop'
-              onClick={() => setProductsOpen(!productsOpen)}
-            >
-              Produkty
-            </NavItem>
-            <NavItem href='/contact' variant='desktop'>
-              Kontakt
-            </NavItem>
-          </List>
+          <Flex gap={8} hideBelow='md'>
+            <List display='flex' flexDirection='row' gap={3}>
+              <NavItem
+                variant='desktop'
+                onClick={() => setProductsOpen(!productsOpen)}
+              >
+                {locale === 'en' ? 'Products' : 'Produkty'}
+              </NavItem>
+              <NavItem href='/contact' variant='desktop'>
+                {locale === 'en' ? 'Contact' : 'Kontakt'}
+              </NavItem>
+            </List>
+            <LocaleSelect locale={locale} />
+          </Flex>
         </Container>
       </Flex>
 
@@ -98,9 +105,11 @@ export default function Header({ locale }: Props) {
       >
         <Flex bg='white' shadow='md' px={4} py={8} hideFrom='md'>
           <List width='100%' display='flex' flexDir='column' gap={3}>
-            <NavItem variant='mobile'>Produkty</NavItem>
+            <NavItem variant='mobile'>
+              {locale === 'en' ? 'Products' : 'Produkty'}
+            </NavItem>
             <NavItem href='/contact' variant='mobile'>
-              Kontakt
+              {locale === 'en' ? 'Contact' : 'Kontakt'}
             </NavItem>
           </List>
         </Flex>
