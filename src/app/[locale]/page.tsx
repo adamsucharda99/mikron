@@ -28,25 +28,25 @@ export default function Home({ params: { locale } }: Props) {
           sizes='100vw'
           style={{ objectFit: 'cover' }}
         />
-        <Box h='100%' w='100%' bg='black' position='absolute' opacity={0.75} />
+        <Box h='100%' w='100%' bg='black' position='absolute' opacity={0.8} />
         <Container
           maxW='container.xl'
           as={Flex}
           zIndex={2}
           direction='column'
-          gap={6}
+          gap={8}
           color='white'
           align='center'
           justify='center'
         >
-          <Heading as='h1'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-            cum.
+          <Heading as='h1' fontSize='5xl'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </Heading>
           <Text fontSize='xl'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-            commodi enim in harum possimus eos voluptatem eligendi iusto! Est,
-            reiciendis.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, veniam.
+            Dolorum delectus maiores id molestiae, optio incidunt quasi pariatur
+            beatae facere minima commodi provident iusto, accusamus numquam quas
+            illo soluta!
           </Text>
         </Container>
       </Flex>
