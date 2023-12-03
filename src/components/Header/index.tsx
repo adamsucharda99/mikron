@@ -74,12 +74,12 @@ export default function Header({ locale }: Props) {
             size='lg'
             icon={<MdMenu />}
             alignSelf='center'
-            hideFrom='md'
+            hideFrom='lg'
             onClick={() => setNavOpen(!navOpen)}
           />
 
           {/* Desktop nav */}
-          <Flex gap={8} hideBelow='md'>
+          <Flex gap={8} hideBelow='lg'>
             <List display='flex' flexDirection='row' gap={3}>
               <NavItem
                 variant='desktop'
@@ -103,7 +103,7 @@ export default function Header({ locale }: Props) {
         style={{ position: 'static' }}
         unmountOnExit
       >
-        <Flex bg='white' shadow='md' px={4} py={8} hideFrom='md'>
+        <Flex bg='white' shadow='md' px={4} py={8} hideFrom='lg'>
           <List width='100%' display='flex' flexDir='column' gap={3}>
             <NavItem variant='mobile'>
               {locale === 'en' ? 'Products' : 'Produkty'}

@@ -16,7 +16,7 @@ export default function page({ params: { locale } }: Props) {
   return (
     <main>
       <Container as='section' maxW='container.xl' py={12}>
-        <SimpleGrid columns={{ md: 2 }} spacing={8}>
+        <SimpleGrid columns={{ lg: 2 }} spacing={8}>
           <Box bg='red' w='100%' h='100%'>
             imgs
           </Box>
