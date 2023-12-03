@@ -3,24 +3,26 @@
 import logo from '@/../public/logo/logo.jpg';
 import {
   Box,
+  Collapse,
   Container,
   Flex,
   IconButton,
   List,
-  Slide,
   Text,
-  useMediaQuery,
+  useOutsideClick,
 } from '@chakra-ui/react';
 import { Titillium_Web } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
+
+const navbarHeight = { base: 20, md: 24 };
 
 interface Props {
   locale: string;
@@ -29,26 +31,18 @@ interface Props {
 export default function Header({ locale }: Props) {
   const [navOpen, setNavOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-
-  const [isMobile] = useMediaQuery('(max-width: 48em)');
+  const ref = useRef<any>();
+  useOutsideClick({ ref, handler: () => setNavOpen(false) });
 
   return (
-    <>
-      <Flex
-        borderBottom='1px'
-        borderColor='gray.300'
-        bg='white'
-        position='sticky'
-        zIndex={2}
-        as='header'
-      >
+    <Box position='fixed' zIndex={999} w='100vw' as='header' ref={ref}>
+      <Flex borderBottom='1px' borderColor='gray.300' bg='white' as='nav'>
         <Container
           maxW='container.xl'
-          height={{ base: 20, md: 24 }}
+          height={navbarHeight}
           display='flex'
           alignItems='stretch'
           justifyContent='space-between'
-          as='nav'
         >
           {/* Logo container */}
           <Flex as={Link} href='/' alignItems='center' gap={3}>
@@ -96,13 +90,13 @@ export default function Header({ locale }: Props) {
         </Container>
       </Flex>
 
+      {/* Products menu */}
+      <Collapse in={productsOpen} animateOpacity>
+        <ProductMenu locale={locale} />
+      </Collapse>
+
       {/* Mobile nav */}
-      <Slide
-        in={navOpen}
-        direction='top'
-        style={{ position: 'static' }}
-        unmountOnExit
-      >
+      <Collapse in={navOpen} animateOpacity>
         <Flex bg='white' shadow='md' px={4} py={8} hideFrom='lg'>
           <List width='100%' display='flex' flexDir='column' gap={3}>
             <NavItem variant='mobile'>
@@ -113,17 +107,7 @@ export default function Header({ locale }: Props) {
             </NavItem>
           </List>
         </Flex>
-      </Slide>
-
-      {/* Products menu */}
-      <Slide
-        in={productsOpen}
-        direction='top'
-        style={{ position: 'static' }}
-        unmountOnExit
-      >
-        <ProductMenu locale={locale} />
-      </Slide>
-    </>
+      </Collapse>
+    </Box>
   );
 }
