@@ -21,7 +21,10 @@ export default function LocaleSelect({ locale }: Props) {
         cursor='pointer'
         align='center'
         _hover={{ bg: 'gray.100' }}
-        px={5}
+        px={4}
+        py={2}
+        alignSelf='center'
+        borderRadius='sm'
       >
         <Text textTransform='uppercase' fontWeight='medium' color='gray.600'>
           {locale}
