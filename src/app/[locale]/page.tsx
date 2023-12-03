@@ -20,7 +20,7 @@ export default function Home({ params: { locale } }: Props) {
 
   return (
     <main>
-      <Flex as='section' minH='600px' h='60vh' position='relative'>
+      <Flex as='section' position='relative' minH='60vh'>
         <Image
           src={cncMachine}
           alt='predaj a servis cnc strojov a pásových píl'
@@ -51,8 +51,8 @@ export default function Home({ params: { locale } }: Props) {
         </Container>
       </Flex>
 
-      <Container maxW='container.xl'>
-        <Flex as='section' minH='400px' h='40vh' py={12}>
+      <Flex as='section' py={16} minH='40vh' align='center'>
+        <Container maxW='container.xl'>
           <SimpleGrid columns={{ lg: 2 }} spacing={8} alignItems='center'>
             <AspectRatio ratio={16 / 9}>
               <iframe
@@ -86,8 +86,8 @@ export default function Home({ params: { locale } }: Props) {
               </Text>
             </Flex>
           </SimpleGrid>
-        </Flex>
-      </Container>
+        </Container>
+      </Flex>
     </main>
   );
 }
