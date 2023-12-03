@@ -38,6 +38,7 @@ export default function Home({ params: { locale } }: Props) {
           color='white'
           align='center'
           justify='center'
+          textAlign='center'
         >
           <Heading as='h1' fontSize='5xl'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
