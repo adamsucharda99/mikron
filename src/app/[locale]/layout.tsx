@@ -5,6 +5,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { Providers } from '../providers';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
         <Providers>
           <Header locale={locale} />
           {children}
+          <Footer locale={locale} />
         </Providers>
       </body>
     </html>
