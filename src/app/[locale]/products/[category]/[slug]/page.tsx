@@ -63,7 +63,7 @@ export default async function Product({ params }: Props) {
                 {manufacturer.fields.name}
               </Text>
               <Heading color='gray.800'>
-                {name} {locale === 'en' ? 'Series' : 'Séria'}
+                {`${name} ${locale === 'en' ? 'Series' : 'Séria'}`}
               </Heading>
             </Flex>
             <Stack spacing={3} sx={{ li: { ml: 4 } }}>
