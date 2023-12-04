@@ -33,6 +33,7 @@ export async function getProductMenuData(locale: string) {
 
   const series = await client.getEntries({
     content_type: 'series',
+    locale,
   });
 
   return { categories, manufacturers, series };
