@@ -19,7 +19,7 @@ import { MdMenu } from 'react-icons/md';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
-import { ProductMenuData } from './productMenuData';
+import { ProductMenuData } from './ProductMenuData';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 

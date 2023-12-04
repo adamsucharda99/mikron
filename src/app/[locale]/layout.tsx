@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import Header, { navbarHeight } from '@/components/Header';
-import { ProductMenuData } from '@/components/Header/productMenuData';
+import { ProductMenuData } from '@/components/Header/ProductMenuData';
 import { client } from '@/contentful';
 import { locales } from '@/i18n';
 import { Box } from '@chakra-ui/react';
