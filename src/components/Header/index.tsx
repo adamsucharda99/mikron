@@ -37,7 +37,13 @@ export default function Header({ locale, productMenuData }: Props) {
   const ref = useRef<any>();
   const pathname = usePathname();
 
-  useOutsideClick({ ref, handler: () => setNavOpen(false) });
+  useOutsideClick({
+    ref,
+    handler: () => {
+      setNavOpen(false);
+      setProductsOpen(false);
+    },
+  });
 
   useEffect(() => {
     setProductsOpen(false), setNavOpen(false);
