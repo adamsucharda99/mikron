@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import Header, { navbarHeight } from '@/components/Header';
-import { CategorySkeleton } from '@/components/Header/contentful';
+import { ProductMenuData } from '@/components/Header/productMenuData';
 import { client } from '@/contentful';
 import { locales } from '@/i18n';
 import { Box } from '@chakra-ui/react';
@@ -21,14 +21,21 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function getCategories(locale: string) {
-  const res = await client.getEntries<CategorySkeleton>({
+export async function getProductMenuData(locale: string) {
+  const categories = await client.getEntries({
     content_type: 'category',
-    include: 1,
     locale,
   });
 
-  return res;
+  const manufacturers = await client.getEntries({
+    content_type: 'manufacturer',
+  });
+
+  const series = await client.getEntries({
+    content_type: 'series',
+  });
+
+  return { categories, manufacturers, series };
 }
 
 interface Props {
@@ -43,13 +50,15 @@ export default async function RootLayout({
   if (!locales.includes(locale as any)) notFound();
   unstable_setRequestLocale(locale);
 
-  const categories = await getCategories(locale);
+  const productMenuData = (await getProductMenuData(
+    locale
+  )) as unknown as ProductMenuData;
 
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <Providers>
-          <Header locale={locale} categories={categories} />
+          <Header locale={locale} productMenuData={productMenuData} />
           <Box h={navbarHeight} />
           {children}
           <Footer locale={locale} />

@@ -4,9 +4,11 @@ import { MdChevronRight } from 'react-icons/md';
 
 interface Props {
   children: React.ReactNode;
+  onClick?: () => void;
+  active?: boolean;
 }
 
-export default function ProductMenuItem({ children }: Props) {
+export default function ProductMenuItem({ children, onClick, active }: Props) {
   return (
     <Flex
       justify='space-between'
@@ -17,9 +19,16 @@ export default function ProductMenuItem({ children }: Props) {
       borderRadius='sm'
       _hover={{ bg: 'gray.100' }}
       _active={{ bg: 'gray.300' }}
+      onClick={onClick}
     >
-      <Text color='gray.800'>{children}</Text>
-      <Icon fontSize={24} color='gray.600'>
+      <Text
+        color={active ? 'brand' : 'gray.800'}
+        fontWeight={active ? 'medium' : 'normal'}
+        textTransform='capitalize'
+      >
+        {children}
+      </Text>
+      <Icon fontSize={24} color={active ? 'brand' : 'gray.600'}>
         <MdChevronRight />
       </Icon>
     </Flex>

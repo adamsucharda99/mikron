@@ -9,32 +9,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Entry, EntryFieldTypes } from 'contentful';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-
-interface SeriesSkeleton {
-  contentTypeId: 'series';
-  fields: {
-    name: EntryFieldTypes.Text;
-    slug: EntryFieldTypes.Text;
-    images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
-    description: EntryFieldTypes.RichText;
-    catalog?: EntryFieldTypes.AssetLink;
-    category: Entry<{
-      contentTypeId: 'category';
-      fields: { name: EntryFieldTypes.Text };
-    }>;
-    manufacturer: Entry<{
-      contentTypeId: 'manufacturer';
-      fields: { name: EntryFieldTypes.Text };
-    }>;
-    seriesParameters: EntryFieldTypes.Object<Record<string, any>>;
-  };
-}
+import { Series } from './series';
 
 interface Props {
-  params: any;
+  params: { locale: string; slug: string };
 }
 
 export async function generateStaticParams() {
@@ -46,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 async function getSeries(slug: string, locale: string) {
-  const res = await client.getEntries<SeriesSkeleton>({
+  const res = await client.getEntries({
     content_type: 'series',
     'fields.slug': slug,
     include: 1,
@@ -63,7 +43,7 @@ async function getSeries(slug: string, locale: string) {
 export default async function Product({ params }: Props) {
   const { locale, slug } = params;
 
-  const series = await getSeries(slug, locale);
+  const series = (await getSeries(slug, locale)) as unknown as Series;
   const { name, manufacturer, images, seriesParameters, description } =
     series.fields;
 
