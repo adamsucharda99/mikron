@@ -22,7 +22,7 @@ import ProductMenu from './ProductMenu';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
-const navbarHeight = { base: 20, md: 24 };
+export const navbarHeight = { base: 20, md: 24 };
 
 interface Props {
   locale: string;
