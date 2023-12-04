@@ -127,7 +127,11 @@ export default function ProductMenu({ locale, productMenuData }: Props) {
                       key={item.fields.slug}
                       href={`/products/${child}/${item.fields.slug}`}
                     >
-                      <ProductMenuItem>{item.fields.name}</ProductMenuItem>
+                      <ProductMenuItem>
+                        {`${item.fields.name} ${
+                          locale === 'en' ? 'Series' : 'Séria'
+                        }`}
+                      </ProductMenuItem>
                     </Link>
                   ))}
               </List>
