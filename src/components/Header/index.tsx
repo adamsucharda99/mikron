@@ -19,6 +19,7 @@ import { MdMenu } from 'react-icons/md';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
+import { CategoryData } from './contentful';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
@@ -26,9 +27,10 @@ export const navbarHeight = { base: 20, md: 24 };
 
 interface Props {
   locale: string;
+  categories: CategoryData;
 }
 
-export default function Header({ locale }: Props) {
+export default function Header({ locale, categories }: Props) {
   const [navOpen, setNavOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const ref = useRef<any>();
@@ -92,7 +94,7 @@ export default function Header({ locale }: Props) {
 
       {/* Products menu */}
       <Collapse in={productsOpen} animateOpacity>
-        <ProductMenu locale={locale} />
+        <ProductMenu locale={locale} categories={categories} />
       </Collapse>
 
       {/* Mobile nav */}

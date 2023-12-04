@@ -1,12 +1,14 @@
+import Footer from '@/components/Footer';
 import Header, { navbarHeight } from '@/components/Header';
+import { CategorySkeleton } from '@/components/Header/contentful';
+import { client } from '@/contentful';
 import { locales } from '@/i18n';
+import { Box } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { Providers } from '../providers';
-import Footer from '@/components/Footer';
-import { Box } from '@chakra-ui/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,20 +21,35 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+export async function getCategories(locale: string) {
+  const res = await client.getEntries<CategorySkeleton>({
+    content_type: 'category',
+    include: 1,
+    locale,
+  });
+
+  return res;
+}
+
 interface Props {
   children: React.ReactNode;
   params: { locale: string };
 }
 
-export default function RootLayout({ children, params: { locale } }: Props) {
+export default async function RootLayout({
+  children,
+  params: { locale },
+}: Props) {
   if (!locales.includes(locale as any)) notFound();
   unstable_setRequestLocale(locale);
+
+  const categories = await getCategories(locale);
 
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <Providers>
-          <Header locale={locale} />
+          <Header locale={locale} categories={categories} />
           <Box h={navbarHeight} />
           {children}
           <Footer locale={locale} />

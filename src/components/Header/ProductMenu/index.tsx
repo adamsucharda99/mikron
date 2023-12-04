@@ -1,14 +1,16 @@
 'use client';
 
 import { Container, Flex, Grid, GridItem, List } from '@chakra-ui/react';
+import { CategoryData } from '../contentful';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
 
 interface Props {
   locale: string;
+  categories: CategoryData;
 }
 
-export default function ProductMenu({ locale }: Props) {
+export default function ProductMenu({ locale, categories }: Props) {
   return (
     <Flex bg='white' shadow='md' px={4} py={8} hideBelow='md'>
       <Container maxW='container.xl'>
