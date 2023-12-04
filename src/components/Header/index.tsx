@@ -14,12 +14,13 @@ import {
 import { Titillium_Web } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
 import { ProductMenuData } from './ProductMenuData';
+import { usePathname } from '@/navigation';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
@@ -34,7 +35,13 @@ export default function Header({ locale, productMenuData }: Props) {
   const [navOpen, setNavOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const ref = useRef<any>();
+  const pathname = usePathname();
+
   useOutsideClick({ ref, handler: () => setNavOpen(false) });
+
+  useEffect(() => {
+    setProductsOpen(false), setNavOpen(false);
+  }, [pathname]);
 
   return (
     <Box position='fixed' zIndex={999} w='100vw' as='header' ref={ref}>
