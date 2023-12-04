@@ -2,7 +2,7 @@
 
 import { Container, Flex, Grid, GridItem, List } from '@chakra-ui/react';
 import { useState } from 'react';
-import { ProductMenuData } from '../productMenuData';
+import { ProductMenuData } from '../ProductMenuData';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
 import { Link } from '@/navigation';
@@ -18,6 +18,20 @@ export default function ProductMenu({ locale, productMenuData }: Props) {
   const [manufacturer, setManufacturer] = useState<string | null>('');
 
   const { categories, manufacturers, series } = productMenuData;
+
+  const getManufacturersByChild = (childSlug: string) => {
+    const seriesFromCategory = series.items.filter(
+      (item) => item.fields.category.fields.slug === childSlug
+    );
+
+    const manufacturerSlugs = seriesFromCategory.map(
+      (series) => series.fields.manufacturer.fields.slug
+    );
+
+    return manufacturers.items.filter((item) =>
+      manufacturerSlugs.includes(item.fields.slug)
+    );
+  };
 
   return (
     <Flex bg='white' shadow='md' px={4} py={8} hideBelow='md'>
@@ -79,7 +93,7 @@ export default function ProductMenu({ locale, productMenuData }: Props) {
                 {locale === 'en' ? 'Manufacturer' : 'Výrobca'}
               </ListHeading>
               <List spacing={2}>
-                {manufacturers.items.map((item) => (
+                {getManufacturersByChild(child).map((item) => (
                   <ProductMenuItem
                     key={item.fields.slug}
                     onClick={() => setManufacturer(item.fields.slug)}
