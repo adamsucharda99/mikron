@@ -96,6 +96,9 @@ export default async function Product({ params }: Props) {
         </SimpleGrid>
 
         <Box>
+          <Heading as='h3' fontSize='2xl' color='gray.500' textAlign='center'>
+            Parametre
+          </Heading>
           <ParameterTable machines={machines.items} />
         </Box>
       </Container>

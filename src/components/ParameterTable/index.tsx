@@ -15,7 +15,7 @@ interface Props {
 
 export default function ParameterTable({ machines }: Props) {
   return (
-    <TableContainer>
+    <TableContainer py={16}>
       <Table variant='simple'>
         <Thead>
           <Tr>
