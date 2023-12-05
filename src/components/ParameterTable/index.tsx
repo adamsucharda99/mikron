@@ -13,7 +13,21 @@ interface Props {
   machines: Machine[];
 }
 
-export default function ParameterTable({ machines }: Props) {
+export default function ParameterTable(props: Props) {
+  const machines = props.machines.sort((a, b) => {
+    const nameA = a.fields.name.toUpperCase();
+    const nameB = b.fields.name.toUpperCase();
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  });
+
   return (
     <TableContainer py={16}>
       <Table variant='simple'>
