@@ -124,14 +124,24 @@ export default function Header({ locale, productMenuData }: Props) {
       {/* Mobile nav */}
       <Collapse in={navOpen} animateOpacity>
         <Flex bg='white' px={4} py={8} hideFrom='lg'>
-          <List width='100%' display='flex' flexDir='column' gap={3}>
-            <NavItem variant='mobile'>
-              {locale === 'en' ? 'Products' : 'Produkty'}
-            </NavItem>
-            <NavItem href='/contact' variant='mobile'>
-              {locale === 'en' ? 'Contact' : 'Kontakt'}
-            </NavItem>
-          </List>
+          {productsOpen ? (
+            <ProductMenu
+              locale={locale}
+              productMenuData={productMenuData}
+              isOpen={true}
+              mobile
+              setProductsOpen={setProductsOpen}
+            />
+          ) : (
+            <List width='100%' display='flex' flexDir='column' gap={3}>
+              <NavItem variant='mobile' onClick={() => setProductsOpen(true)}>
+                {locale === 'en' ? 'Products' : 'Produkty'}
+              </NavItem>
+              <NavItem href='/contact' variant='mobile'>
+                {locale === 'en' ? 'Contact' : 'Kontakt'}
+              </NavItem>
+            </List>
+          )}
         </Flex>
       </Collapse>
     </Box>
