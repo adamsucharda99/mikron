@@ -50,7 +50,14 @@ export default function Header({ locale, productMenuData }: Props) {
   }, [pathname]);
 
   return (
-    <Box position='fixed' zIndex={999} w='100vw' as='header' ref={ref}>
+    <Box
+      position='fixed'
+      zIndex={999}
+      w='100vw'
+      as='header'
+      ref={ref}
+      shadow={navOpen || productsOpen ? 'md' : 'none'}
+    >
       <Flex borderBottom='1px' borderColor='gray.300' bg='white' as='nav'>
         <Container
           maxW='container.xl'
@@ -116,7 +123,7 @@ export default function Header({ locale, productMenuData }: Props) {
 
       {/* Mobile nav */}
       <Collapse in={navOpen} animateOpacity>
-        <Flex bg='white' shadow='md' px={4} py={8} hideFrom='lg'>
+        <Flex bg='white' px={4} py={8} hideFrom='lg'>
           <List width='100%' display='flex' flexDir='column' gap={3}>
             <NavItem variant='mobile'>
               {locale === 'en' ? 'Products' : 'Produkty'}

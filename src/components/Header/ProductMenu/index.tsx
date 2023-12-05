@@ -45,7 +45,7 @@ export default function ProductMenu({
   };
 
   return (
-    <Flex bg='white' shadow='md' px={4} py={8} hideBelow='md'>
+    <Flex bg='white' px={4} py={8} hideBelow='md'>
       <Container maxW='container.xl'>
         <Grid templateColumns='repeat(4, 1fr)' gap={4} flex={1}>
           <GridItem>
