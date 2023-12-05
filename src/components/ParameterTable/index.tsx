@@ -29,7 +29,7 @@ export default function ParameterTable(props: Props) {
   });
 
   return (
-    <TableContainer py={16}>
+    <TableContainer py={12}>
       <Table variant='simple'>
         <Thead>
           <Tr>

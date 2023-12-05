@@ -95,7 +95,7 @@ export default async function Product({ params }: Props) {
           </Flex>
         </SimpleGrid>
 
-        <Box>
+        <Box py={8}>
           <Heading as='h3' fontSize='2xl' color='gray.500' textAlign='center'>
             Parametre
           </Heading>
