@@ -128,7 +128,7 @@ export default function Header({ locale, productMenuData }: Props) {
             <ProductMenu
               locale={locale}
               productMenuData={productMenuData}
-              isOpen={true}
+              isOpen={productsOpen}
               mobile
               setProductsOpen={setProductsOpen}
             />
