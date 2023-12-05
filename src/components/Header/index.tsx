@@ -107,7 +107,11 @@ export default function Header({ locale, productMenuData }: Props) {
 
       {/* Products menu */}
       <Collapse in={productsOpen} animateOpacity>
-        <ProductMenu locale={locale} productMenuData={productMenuData} />
+        <ProductMenu
+          locale={locale}
+          productMenuData={productMenuData}
+          isOpen={productsOpen}
+        />
       </Collapse>
 
       {/* Mobile nav */}

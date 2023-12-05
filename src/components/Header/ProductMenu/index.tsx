@@ -1,7 +1,7 @@
 'use client';
 
 import { Container, Flex, Grid, GridItem, List } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductMenuData } from '../ProductMenuData';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
@@ -10,14 +10,25 @@ import { Link } from '@/navigation';
 interface Props {
   locale: string;
   productMenuData: ProductMenuData;
+  isOpen: boolean;
 }
 
-export default function ProductMenu({ locale, productMenuData }: Props) {
+export default function ProductMenu({
+  locale,
+  productMenuData,
+  isOpen,
+}: Props) {
   const [parent, setParent] = useState<string | null>('');
   const [child, setChild] = useState<string | null>('');
   const [manufacturer, setManufacturer] = useState<string | null>('');
 
   const { categories, manufacturers, series } = productMenuData;
+
+  useEffect(() => {
+    setParent(null);
+    setChild(null);
+    setManufacturer(null);
+  }, [isOpen]);
 
   const getManufacturersByChild = (childSlug: string) => {
     const seriesFromCategory = series.items.filter(
