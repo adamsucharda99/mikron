@@ -1,3 +1,18 @@
+export interface Machine {
+  fields: {
+    name: string;
+    parameters: {
+      parameterGroups: {
+        label: string;
+        parameters: {
+          label: string;
+          value: string;
+        }[];
+      }[];
+    };
+  };
+}
+
 export interface Series {
   fields: {
     name: string;
@@ -11,6 +26,7 @@ export interface Series {
       };
     }[];
     description: any;
+    details?: any;
     catalog?: any;
     category: {
       fields: { name: string };
@@ -20,6 +36,6 @@ export interface Series {
         name: string;
       };
     };
-    seriesParameters: any;
   };
+  machines: { items: Machine[] };
 }

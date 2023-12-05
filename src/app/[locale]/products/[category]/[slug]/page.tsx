@@ -1,5 +1,7 @@
+import ParameterTable from '@/components/ParameterTable';
 import { client } from '@/contentful';
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -26,15 +28,20 @@ export async function generateStaticParams() {
 }
 
 async function getSeries(slug: string, locale: string) {
-  const res = await client.getEntries({
+  const series = await client.getEntries({
     content_type: 'series',
     'fields.slug': slug,
     include: 1,
     locale,
   });
 
-  if (res.items.length) {
-    return res.items[0];
+  const machines = await client.getEntries({
+    content_type: 'machine',
+    'fields.series.sys.id': series.items[0].sys.id,
+  });
+
+  if (series.items.length) {
+    return { ...series.items[0], machines };
   } else {
     notFound();
   }
@@ -43,14 +50,22 @@ async function getSeries(slug: string, locale: string) {
 export default async function Product({ params }: Props) {
   const { locale, slug } = params;
 
-  const series = (await getSeries(slug, locale)) as unknown as Series;
-  const { name, manufacturer, images, seriesParameters, description } =
-    series.fields;
+  const { fields, machines } = (await getSeries(
+    slug,
+    locale
+  )) as unknown as Series;
+  const { name, manufacturer, images, description } = fields;
 
   return (
     <main>
-      <Container as='section' maxW='container.xl'>
-        <SimpleGrid columns={{ lg: 2 }} spacing={8} alignItems='center'>
+      <Container maxW='container.xl'>
+        <SimpleGrid
+          columns={{ lg: 2 }}
+          spacing={8}
+          alignItems='center'
+          minH='50vh'
+          as='section'
+        >
           <Image
             src={'https:' + images[0].fields.file.url}
             width={images[0].fields.file.details.image.width}
@@ -79,6 +94,10 @@ export default async function Product({ params }: Props) {
             </Flex>
           </Flex>
         </SimpleGrid>
+
+        <Box>
+          <ParameterTable machines={machines.items} />
+        </Box>
       </Container>
     </main>
   );
