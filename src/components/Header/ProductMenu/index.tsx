@@ -19,7 +19,7 @@ interface Props {
   locale: string;
   productMenuData: ProductMenuData;
   isOpen: boolean;
-  mobile?: boolean;
+  mobile?: true;
   setProductsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

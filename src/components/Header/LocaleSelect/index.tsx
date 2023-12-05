@@ -22,20 +22,29 @@ export default function LocaleSelect({ locale }: Props) {
         align='center'
         _hover={{ bg: 'gray.100' }}
         px={4}
-        py={2}
-        alignSelf='center'
+        py={4}
+        alignSelf={{ base: 'stretch', lg: 'center' }}
         borderRadius='sm'
+        bg={{ base: 'gray.100', lg: 'none' }}
       >
         <Text textTransform='uppercase' fontWeight='medium' color='gray.600'>
           {locale}
         </Text>
       </MenuButton>
-      <MenuList as={Flex} direction='column' py={2} minW={24}>
+      <MenuList
+        as={Flex}
+        direction='column'
+        py={2}
+        ml={{ base: -4, lg: 0 }}
+        minW={{ base: '100vw', lg: 24 }}
+        border='none'
+        borderRadius={{ base: 'none', lg: 'xs' }}
+      >
         <MenuGroup>
           <LocaleSelectItem locale='sk'>sk</LocaleSelectItem>
           <LocaleSelectItem locale='en'>en</LocaleSelectItem>
         </MenuGroup>
-        <MenuDivider />
+        <MenuDivider color='gray.300' />
         <MenuGroup>
           <LocaleSelectItem redirect='https://www.mikronmoravia.cz/'>
             cz

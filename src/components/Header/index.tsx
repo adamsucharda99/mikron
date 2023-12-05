@@ -1,6 +1,7 @@
 'use client';
 
 import logo from '@/../public/logo/logo.jpg';
+import { usePathname } from '@/navigation';
 import {
   Box,
   Collapse,
@@ -20,7 +21,6 @@ import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
 import { ProductMenuData } from './ProductMenuData';
-import { usePathname } from '@/navigation';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
@@ -140,6 +140,7 @@ export default function Header({ locale, productMenuData }: Props) {
               <NavItem href='/contact' variant='mobile'>
                 {locale === 'en' ? 'Contact' : 'Kontakt'}
               </NavItem>
+              <LocaleSelect locale={locale} />
             </List>
           )}
         </Flex>

@@ -20,8 +20,8 @@ export default function LocaleSelectItem({
       as={Link}
       href={redirect ?? pathname}
       locale={locale}
-      px={6}
-      py={2}
+      px={{ base: 12, lg: 6 }}
+      py={{ base: 4, lg: 2 }}
       _hover={{ bg: 'gray.100' }}
     >
       <Text
