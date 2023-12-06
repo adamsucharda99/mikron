@@ -15,6 +15,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Series } from './series';
+import ContactModalButton from '@/components/ContactModalButton';
 
 interface Props {
   params: { locale: string; slug: string };
@@ -88,9 +89,7 @@ export default async function Product({ params }: Props) {
               {documentToReactComponents(description)}
             </Stack>
             <Flex gap={3} mt={2}>
-              <Button variant='brand'>
-                {locale === 'en' ? 'Contact' : 'Kontakt'}
-              </Button>
+              <ContactModalButton locale={locale} />
               {fields.catalog && (
                 <Link
                   href={'https:' + fields.catalog.fields.file.url}

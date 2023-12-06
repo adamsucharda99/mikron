@@ -36,7 +36,7 @@ export default function ContactForm({ locale, ...props }: Props) {
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
             <FormControl>
               <FormLabel>
-                {locale === 'en' ? 'Company' : 'Spoločnosť'}
+                {locale === 'en' ? 'Company' : 'Názov spoločnosti'}
               </FormLabel>
               <Input />
             </FormControl>
