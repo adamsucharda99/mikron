@@ -1,4 +1,5 @@
 import ContactCard from '@/components/ContactCard';
+import ContactForm from '@/components/ContactForm';
 import ContactItem from '@/components/ContactItem';
 import { client } from '@/contentful';
 import { Link } from '@/navigation';
@@ -95,6 +96,10 @@ export default async function Contact({ params: { locale } }: Props) {
             values={['0042135 / 6428 648', '00421 35 / 6428 649']}
           />
         </Stack>
+
+        <Box mb={16}>
+          <ContactForm locale={locale} variant='outline' />
+        </Box>
 
         <Stack spacing={2} mb={16} mx={2}>
           <Flex align='center' gap={2}>

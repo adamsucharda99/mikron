@@ -15,11 +15,12 @@ import {
 
 interface Props {
   locale: string;
+  [key: string]: any;
 }
 
-export default function ContactForm({ locale }: Props) {
+export default function ContactForm({ locale, ...props }: Props) {
   return (
-    <Card as='form' shadow='none'>
+    <Card as='form' shadow='none' {...props}>
       <CardBody>
         <Stack spacing={6} color='gray.700'>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
@@ -59,7 +60,7 @@ export default function ContactForm({ locale }: Props) {
               ? 'By selecting this, you agree to our privacy policy.'
               : 'Súhlasím so spracovaním osobných údajov.'}
           </Checkbox>
-          <Button variant='brand' role='submit'>
+          <Button variant='brand' role='submit' alignSelf={{ lg: 'start' }}>
             {locale === 'en' ? 'Submit' : 'Odoslať'}
           </Button>
         </Flex>
