@@ -71,7 +71,7 @@ export default async function Contact({ params: { locale } }: Props) {
               >
                 {department.fields.name}
               </Heading>
-              <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap={8}>
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
                 {contacts.items
                   .filter(
                     (contact) =>
