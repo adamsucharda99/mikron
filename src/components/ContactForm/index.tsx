@@ -19,7 +19,7 @@ interface Props {
 
 export default function ContactForm({ locale }: Props) {
   return (
-    <Card as='form' variant='outline'>
+    <Card as='form' shadow='none'>
       <CardBody>
         <Stack spacing={6} color='gray.700'>
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>

@@ -1,19 +1,30 @@
-import { unstable_setRequestLocale } from 'next-intl/server';
-import Image from 'next/image';
 import cncMachine from '@/../public/cnc-machine.jpg';
+import ContactForm from '@/components/ContactForm';
+import ContactItem from '@/components/ContactItem';
 import {
   AspectRatio,
   Box,
   Container,
+  Divider,
   Flex,
   Heading,
   SimpleGrid,
+  Stack,
   Text,
 } from '@chakra-ui/react';
+import { unstable_setRequestLocale } from 'next-intl/server';
+import Image from 'next/image';
+import {
+  MdOutlineEmail,
+  MdOutlinePhone,
+  MdShareLocation,
+} from 'react-icons/md';
 
 interface Props {
   params: { locale: string };
 }
+
+const sectionPadding = { base: 12, lg: 16 };
 
 export default function Home({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
@@ -52,7 +63,7 @@ export default function Home({ params: { locale } }: Props) {
         </Container>
       </Flex>
 
-      <Flex as='section' py={16} minH='40vh' align='center'>
+      <Flex as='section' py={sectionPadding} minH='40vh' align='center'>
         <Container maxW='container.xl'>
           <SimpleGrid columns={{ lg: 2 }} spacing={8} alignItems='center'>
             <AspectRatio ratio={16 / 9}>
@@ -89,6 +100,53 @@ export default function Home({ params: { locale } }: Props) {
           </SimpleGrid>
         </Container>
       </Flex>
+
+      <Container as='section' maxW='container.xl' py={sectionPadding}>
+        <SimpleGrid gap={10} columns={{ base: 1, lg: 2 }} alignItems='center'>
+          <Box>
+            <Heading
+              ml={2}
+              as='h3'
+              fontSize='3xl'
+              color='gray.800'
+              textAlign='center'
+              mb={6}
+            >
+              Kontakt
+            </Heading>
+            <Stack divider={<Divider />}>
+              <ContactItem
+                label={locale === 'en' ? 'Address' : 'Adresa'}
+                values={['Svetlá 8, 811 02 Bratislava, Slovenská republika']}
+              />
+              <ContactItem
+                label={
+                  locale === 'en'
+                    ? 'Office and postal address'
+                    : 'Prevádzka a korešpondenčná adresa'
+                }
+                values={
+                  locale === 'en'
+                    ? ['Nitrianska 13, 940 01 Nové Zámky, Slovakia']
+                    : ['Nitrianska 13, 940 01 Nové Zámky, Slovenská republika']
+                }
+                icon={<MdShareLocation />}
+              />
+              <ContactItem
+                label='Email'
+                icon={<MdOutlineEmail />}
+                values={['mikron@mikron.sk']}
+              />
+              <ContactItem
+                label={locale === 'en' ? 'Phone' : 'Telefón'}
+                icon={<MdOutlinePhone />}
+                values={['0042135 / 6428 648', '00421 35 / 6428 649']}
+              />
+            </Stack>
+          </Box>
+          <ContactForm locale={locale} />
+        </SimpleGrid>
+      </Container>
     </main>
   );
 }
