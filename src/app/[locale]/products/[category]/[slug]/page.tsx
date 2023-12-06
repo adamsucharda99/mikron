@@ -97,7 +97,13 @@ export default async function Product({ params }: Props) {
 
         {machines.items.length > 0 && (
           <Box py={8}>
-            <Heading as='h3' fontSize='2xl' color='gray.500' textAlign='center'>
+            <Heading
+              as='h3'
+              fontSize='2xl'
+              color='gray.700'
+              fontWeight='semibold'
+              textAlign='center'
+            >
               Parametre
             </Heading>
             <ParameterTable machines={machines.items} />
