@@ -27,7 +27,7 @@ export interface Series {
     }[];
     description: any;
     details?: any;
-    catalog?: any;
+    catalog?: { fields: { file: { url: string } } };
     category: {
       fields: { name: string };
     };

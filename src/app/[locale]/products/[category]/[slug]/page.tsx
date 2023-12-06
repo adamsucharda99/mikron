@@ -1,5 +1,6 @@
 import ParameterTable from '@/components/ParameterTable';
 import { client } from '@/contentful';
+import { Link } from '@/navigation';
 import {
   Box,
   Button,
@@ -56,6 +57,8 @@ export default async function Product({ params }: Props) {
   )) as unknown as Series;
   const { name, manufacturer, images, description } = fields;
 
+  console.log(fields.catalog);
+
   return (
     <main>
       <Container maxW='container.xl'>
@@ -88,9 +91,16 @@ export default async function Product({ params }: Props) {
               <Button variant='brand'>
                 {locale === 'en' ? 'Contact' : 'Kontakt'}
               </Button>
-              <Button variant='outline'>
-                {locale === 'en' ? 'Catalog' : 'Katalóg'}
-              </Button>
+              {fields.catalog && (
+                <Link
+                  href={'https:' + fields.catalog.fields.file.url}
+                  target='_blank'
+                >
+                  <Button variant='outline'>
+                    {locale === 'en' ? 'Catalog' : 'Katalóg'}
+                  </Button>
+                </Link>
+              )}
             </Flex>
           </Flex>
         </SimpleGrid>
