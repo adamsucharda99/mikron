@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { Box, Flex, Icon, SystemStyleObject, Text } from '@chakra-ui/react';
 import React from 'react';
 import { GoDot } from 'react-icons/go';
 
@@ -10,7 +10,7 @@ type Props = {
 
 export default function ContactItem({ label, icon, values }: Props) {
   return (
-    <Flex gap={4} py={4} px={2} align='center'>
+    <Flex gap={6} py={4} px={2} align='center'>
       <Icon fontSize={24} color='brand'>
         {icon ?? <GoDot />}
       </Icon>
@@ -18,7 +18,7 @@ export default function ContactItem({ label, icon, values }: Props) {
         <Text
           textTransform='uppercase'
           fontWeight='semibold'
-          color='gray.500'
+          color='gray.600'
           fontSize='sm'
         >
           {label}

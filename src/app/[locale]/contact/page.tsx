@@ -1,13 +1,22 @@
 import ContactCard from '@/components/ContactCard';
+import ContactItem from '@/components/ContactItem';
 import { client } from '@/contentful';
+import { Link } from '@/navigation';
 import {
   Box,
   Container,
   Divider,
+  Flex,
   Heading,
   SimpleGrid,
   Stack,
+  Text,
 } from '@chakra-ui/react';
+import {
+  MdOutlineEmail,
+  MdOutlinePhone,
+  MdShareLocation,
+} from 'react-icons/md';
 
 interface Props {
   params: {
@@ -57,6 +66,90 @@ export default async function Contact({ params: { locale } }: Props) {
         <Heading textAlign='center' mb={16} color='gray.700'>
           {locale === 'en' ? 'Contact' : 'Kontakt'}
         </Heading>
+        <Stack divider={<Divider />} mb={12}>
+          <ContactItem
+            label={locale === 'en' ? 'Address' : 'Adresa'}
+            values={['Svetlá 8, 811 02 Bratislava, Slovenská republika']}
+          />
+          <ContactItem
+            label={
+              locale === 'en'
+                ? 'Office and postal address'
+                : 'Prevádzka a korešpondenčná adresa'
+            }
+            values={
+              locale === 'en'
+                ? ['Nitrianska 13, 940 01 Nové Zámky, Slovakia']
+                : ['Nitrianska 13, 940 01 Nové Zámky, Slovenská republika']
+            }
+            icon={<MdShareLocation />}
+          />
+          <ContactItem
+            label='Email'
+            icon={<MdOutlineEmail />}
+            values={['mikron@mikron.sk']}
+          />
+          <ContactItem
+            label={locale === 'en' ? 'Phone' : 'Telefón'}
+            icon={<MdOutlinePhone />}
+            values={['0042135 / 6428 648', '00421 35 / 6428 649']}
+          />
+        </Stack>
+
+        <Stack spacing={2} mb={16} mx={2}>
+          <Flex align='center' gap={2}>
+            <Text
+              color='gray.600'
+              textTransform='uppercase'
+              fontSize='sm'
+              fontWeight='semibold'
+            >
+              {locale === 'en' ? 'Company ID:' : 'IČO:'}
+            </Text>
+            <Text>34120297</Text>
+          </Flex>
+
+          {locale === 'sk' && (
+            <Flex align='center' gap={2}>
+              <Text
+                color='gray.600'
+                textTransform='uppercase'
+                fontSize='sm'
+                fontWeight='semibold'
+              >
+                DIČ:
+              </Text>
+              <Text>2020414517</Text>
+            </Flex>
+          )}
+
+          <Flex align='center' gap={2}>
+            <Text
+              color='gray.600'
+              textTransform='uppercase'
+              fontSize='sm'
+              fontWeight='semibold'
+            >
+              {locale === 'en' ? 'VAT No.:' : 'IČ DPH:'}
+            </Text>
+            <Text>SK2020414517</Text>
+          </Flex>
+
+          <Text fontSize='sm' color='gray.600'>
+            {locale === 'en'
+              ? 'The Company MIKRON SLOVAKIA, s.r.o. is registered at'
+              : 'Spoločnosť MIKRON SLOVAKIA, s.r.o. je registrovaná na'}{' '}
+            <Link
+              style={{ textDecoration: 'underline' }}
+              href='https://www.orsr.sk/vypis.asp?ID=2854&SID=9&P=0'
+            >
+              {locale === 'en'
+                ? 'District court in  Bratislava I, insert No. 105389/B.'
+                : 'Okresnom súde v Bratislave I, vložka č. 105389/B.'}
+            </Link>
+          </Text>
+        </Stack>
+
         <Stack spacing={8} divider={<Divider />}>
           {departments.items.reverse().map((department) => (
             <Box key={department.sys.id}>
