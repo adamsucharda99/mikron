@@ -62,6 +62,7 @@ export default function ProductMenu({
       <List spacing={2}>
         {categories.items
           .filter((item) => !item.fields.parent)
+          .reverse()
           .map((item) => (
             <ProductMenuItem
               key={item.fields.slug}
@@ -90,6 +91,7 @@ export default function ProductMenu({
       <List spacing={2}>
         {categories.items
           .filter((item) => item.fields.parent?.fields.slug === parent)
+          .reverse()
           .map((item) => (
             <ProductMenuItem
               key={item.fields.slug}
