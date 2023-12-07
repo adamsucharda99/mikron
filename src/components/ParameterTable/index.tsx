@@ -1,4 +1,4 @@
-import { Machine } from '@/app/[locale]/products/[category]/[slug]/Series';
+import { Machine } from '@/app/[locale]/products/[category]/[slug]/series';
 import {
   Table,
   TableContainer,
