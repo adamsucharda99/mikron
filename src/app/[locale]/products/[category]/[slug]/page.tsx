@@ -111,7 +111,7 @@ export default async function Product({ params }: Props) {
               fontWeight='semibold'
               textAlign='center'
             >
-              Parametre
+              {locale === 'en' ? 'Parameters' : 'Parametre'}
             </Heading>
             <ParameterTable machines={machines.items} />
           </Box>
