@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
-import { ProductMenuData } from '../ProductMenuData';
+import { ProductMenuData } from '../../../app/[locale]/productMenuData';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
 

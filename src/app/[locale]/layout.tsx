@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
 import Header, { navbarHeight } from '@/components/Header';
-import { ProductMenuData } from '@/components/Header/ProductMenuData';
 import { client } from '@/contentful';
 import { locales } from '@/i18n';
 import { Box } from '@chakra-ui/react';
@@ -9,6 +8,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { Providers } from '../providers';
+import { ProductMenuData } from './productMenuData';
 
 const inter = Inter({ subsets: ['latin'] });
 
