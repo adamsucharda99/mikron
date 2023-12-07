@@ -1,6 +1,7 @@
 import ContactCard from '@/components/ContactCard';
 import ContactForm from '@/components/ContactForm';
-import ContactItem from '@/components/ContactItem';
+import ContactStack from '@/components/ContactStack';
+import ContactItem from '@/components/ContactStack/ContactStackItem';
 import { client } from '@/contentful';
 import { Link } from '@/navigation';
 import {
@@ -67,35 +68,7 @@ export default async function Contact({ params: { locale } }: Props) {
         <Heading textAlign='center' mb={16} color='gray.700'>
           {locale === 'en' ? 'Contact' : 'Kontakt'}
         </Heading>
-        <Stack divider={<Divider />} mb={12}>
-          <ContactItem
-            label={locale === 'en' ? 'Address' : 'Adresa'}
-            values={['Svetlá 8, 811 02 Bratislava, Slovenská republika']}
-          />
-          <ContactItem
-            label={
-              locale === 'en'
-                ? 'Office and postal address'
-                : 'Prevádzka a korešpondenčná adresa'
-            }
-            values={
-              locale === 'en'
-                ? ['Nitrianska 13, 940 01 Nové Zámky, Slovakia']
-                : ['Nitrianska 13, 940 01 Nové Zámky, Slovenská republika']
-            }
-            icon={<MdShareLocation />}
-          />
-          <ContactItem
-            label='Email'
-            icon={<MdOutlineEmail />}
-            values={['mikron@mikron.sk']}
-          />
-          <ContactItem
-            label={locale === 'en' ? 'Phone' : 'Telefón'}
-            icon={<MdOutlinePhone />}
-            values={['0042135 / 6428 648', '00421 35 / 6428 649']}
-          />
-        </Stack>
+        <ContactStack locale={locale} mb={16} />
 
         <Box mb={16}>
           <ContactForm locale={locale} variant='outline' />
