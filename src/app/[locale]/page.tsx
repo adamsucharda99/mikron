@@ -64,6 +64,7 @@ export default function Home({ params: { locale } }: Props) {
               <iframe
                 src='https://www.youtube.com/embed/5mVGR7ja1NE'
                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                //@ts-ignore
                 allowfullscreen
                 frameborder='0'
               />
