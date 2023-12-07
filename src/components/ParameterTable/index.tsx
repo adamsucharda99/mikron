@@ -15,17 +15,13 @@ interface Props {
 
 export default function ParameterTable(props: Props) {
   const machines = props.machines.sort((a, b) => {
-    const nameA = a.fields.name.toUpperCase();
-    const nameB = b.fields.name.toUpperCase();
+    const matchA = a.fields.name.match(/\d+/) || ['0'];
+    const matchB = b.fields.name.match(/\d+/) || ['0'];
 
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
+    const numberA = parseInt(matchA[0], 10);
+    const numberB = parseInt(matchB[0], 10);
 
-    return 0;
+    return numberA - numberB;
   });
 
   return (

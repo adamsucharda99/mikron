@@ -58,8 +58,6 @@ export default async function Product({ params }: Props) {
   )) as unknown as Series;
   const { name, manufacturer, images, description } = fields;
 
-  console.log(fields.catalog);
-
   return (
     <main>
       <Container maxW='container.xl'>
