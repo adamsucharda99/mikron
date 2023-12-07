@@ -1,25 +1,17 @@
 import cncMachine from '@/../public/cnc-machine.jpg';
 import ContactForm from '@/components/ContactForm';
 import ContactStack from '@/components/ContactStack';
-import ContactItem from '@/components/ContactStack/ContactStackItem';
 import {
   AspectRatio,
   Box,
   Container,
-  Divider,
   Flex,
   Heading,
   SimpleGrid,
-  Stack,
   Text,
 } from '@chakra-ui/react';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
-import {
-  MdOutlineEmail,
-  MdOutlinePhone,
-  MdShareLocation,
-} from 'react-icons/md';
 
 interface Props {
   params: { locale: string };

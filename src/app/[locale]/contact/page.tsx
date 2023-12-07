@@ -1,7 +1,6 @@
 import ContactCard from '@/components/ContactCard';
 import ContactForm from '@/components/ContactForm';
 import ContactStack from '@/components/ContactStack';
-import ContactItem from '@/components/ContactStack/ContactStackItem';
 import { client } from '@/contentful';
 import { Link } from '@/navigation';
 import {
@@ -14,11 +13,6 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import {
-  MdOutlineEmail,
-  MdOutlinePhone,
-  MdShareLocation,
-} from 'react-icons/md';
 
 interface Props {
   params: {
