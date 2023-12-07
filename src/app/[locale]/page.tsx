@@ -45,13 +45,14 @@ export default function Home({ params: { locale } }: Props) {
           textAlign='center'
         >
           <Heading as='h1' fontSize='5xl'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            {locale === 'en'
+              ? 'Leading-Edge CNC Machining Solutions for Industry Professionals'
+              : 'CNC obrábacie centrá a pásové píly pre profesionálov v priemysle'}
           </Heading>
           <Text fontSize='xl'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, veniam.
-            Dolorum delectus maiores id molestiae, optio incidunt quasi pariatur
-            beatae facere minima commodi provident iusto, accusamus numquam quas
-            illo soluta!
+            {locale === 'en'
+              ? 'Enhance your production with our CNC machines: advanced technology, exceptional precision, and robust performance for various industrial applications.'
+              : 'Vylepšite svoju výrobu s našimi CNC strojmi: pokročilá technológia, výnimočná presnosť a robustný výkon pre rôzne priemyselné aplikácie.'}
           </Text>
         </Container>
       </Flex>
