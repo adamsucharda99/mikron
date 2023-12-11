@@ -83,9 +83,11 @@ export default async function Product({ params }: Props) {
                 {`${name} ${locale === 'en' ? 'Series' : 'Séria'}`}
               </Heading>
             </Flex>
-            <Stack spacing={3} sx={{ li: { ml: 4 } }}>
-              {documentToReactComponents(description)}
-            </Stack>
+            {description && (
+              <Stack spacing={3} sx={{ li: { ml: 4 } }}>
+                {documentToReactComponents(description)}
+              </Stack>
+            )}
             <Flex gap={3} mt={2}>
               <ContactModalButton locale={locale} />
               {fields.catalog && (
