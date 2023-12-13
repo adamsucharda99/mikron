@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import { Providers } from '../providers';
+import { Providers } from '../../providers';
 import { ProductMenuData } from './productMenuData';
 
 const inter = Inter({ subsets: ['latin'] });
