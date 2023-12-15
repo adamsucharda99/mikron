@@ -1,13 +1,30 @@
 export interface Series {
   name: string;
   manufacturer: string;
-  image: any;
-  catalog?: any;
-  description: any;
+  imageUrl: string;
+  catalogUrl?: string;
+  description: {
+    children: { _type: string; text: string; _key: string }[];
+    listItem?: string;
+  }[];
   machines: Machine[];
+  seriesParameterGroups: SeriesParameterGroup[];
 }
 
 export interface Machine {
   name: string;
-  image: any;
+  machineParameters: {
+    _key: string;
+    seriesParameterId: string;
+    seriesParameterGroupKey: string;
+  }[];
+}
+
+export interface SeriesParameterGroup {
+  label: string;
+  seriesParameters: {
+    id: string;
+    label: string;
+    unit?: string;
+  }[];
 }

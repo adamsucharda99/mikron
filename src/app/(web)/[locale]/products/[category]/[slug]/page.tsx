@@ -27,10 +27,21 @@ const querySeriesBySlug = groq`
   *[_type == 'series' && slug.current == $slug][0] {
   name,
   'manufacturer': manufacturer -> name,
-  image,
-  catalog,
+  'imageUrl': image.asset -> url,
+  'catalogUrl': catalog.asset -> url,
   'description': description[$locale],
-  'machines': *[_type == 'machine' && series._ref == ^._id]
+  'machines': *[_type == 'machine' && series._ref == ^._id] {
+    name,
+    machineParameters[]
+  },
+  seriesParameterGroups[] {
+    'label': label[$locale],
+    seriesParameters[] {
+      id,
+      'label': label[$locale],
+      unit
+    }
+  }
 }
 `;
 
@@ -56,8 +67,15 @@ async function getSeries(slug: string, locale: string) {
 export default async function Product({ params }: Props) {
   const { locale, slug } = params;
 
-  const { name, manufacturer, image, catalog, description, machines } =
-    await getSeries(slug, locale);
+  const {
+    name,
+    manufacturer,
+    imageUrl,
+    catalogUrl,
+    description,
+    machines,
+    seriesParameterGroups,
+  } = await getSeries(slug, locale);
 
   return (
     <main>
@@ -69,12 +87,7 @@ export default async function Product({ params }: Props) {
           minH='50vh'
           as='section'
         >
-          <Image
-            src={'https:' + images[0].fields.file.url}
-            width={images[0].fields.file.details.image.width}
-            height={images[0].fields.file.details.image.height}
-            alt={name}
-          />
+          <Image src={imageUrl} alt={name} />
           <Flex direction='column' gap={6} py={12}>
             <Flex direction='column'>
               <Text fontWeight='medium' color='gray.600'>
@@ -87,11 +100,8 @@ export default async function Product({ params }: Props) {
             {description && <Stack spacing={3} sx={{ li: { ml: 4 } }}></Stack>}
             <Flex gap={3} mt={2}>
               <ContactModalButton locale={locale} />
-              {fields.catalog && (
-                <Link
-                  href={'https:' + fields.catalog.fields.file.url}
-                  target='_blank'
-                >
+              {catalogUrl && (
+                <Link href={catalogUrl} target='_blank'>
                   <Button variant='outline'>
                     {locale === 'en' ? 'Catalog' : 'Katalóg'}
                   </Button>
@@ -101,7 +111,7 @@ export default async function Product({ params }: Props) {
           </Flex>
         </SimpleGrid>
 
-        {machines.items.length > 0 && (
+        {machines.length > 0 && (
           <Box py={8}>
             <Heading
               as='h3'
@@ -112,7 +122,10 @@ export default async function Product({ params }: Props) {
             >
               {locale === 'en' ? 'Parameters' : 'Parametre'}
             </Heading>
-            <ParameterTable machines={machines.items} />
+            <ParameterTable
+              machines={machines}
+              seriesParameterGroups={seriesParameterGroups}
+            />
           </Box>
         )}
       </Container>

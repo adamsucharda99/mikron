@@ -1,4 +1,7 @@
-import { Machine } from '@/app/(web)/[locale]/products/[category]/[slug]/series';
+import {
+  Machine,
+  SeriesParameterGroup,
+} from '@/app/(web)/[locale]/products/[category]/[slug]/series';
 import {
   Table,
   TableContainer,
@@ -11,19 +14,13 @@ import {
 
 interface Props {
   machines: Machine[];
+  seriesParameterGroups: SeriesParameterGroup[];
 }
 
-export default function ParameterTable(props: Props) {
-  const machines = props.machines.sort((a, b) => {
-    const matchA = a.fields.name.match(/\d+/) || ['0'];
-    const matchB = b.fields.name.match(/\d+/) || ['0'];
-
-    const numberA = parseInt(matchA[0], 10);
-    const numberB = parseInt(matchB[0], 10);
-
-    return numberA - numberB;
-  });
-
+export default function ParameterTable({
+  machines,
+  seriesParameterGroups,
+}: Props) {
   return (
     <TableContainer py={12}>
       <Table variant='simple'>
