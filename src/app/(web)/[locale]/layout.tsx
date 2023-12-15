@@ -18,7 +18,8 @@ const query = groq`
       'series': *[_type == 'series' && category._ref == ^._id] {
       _id,  
       name,
-      'manufacturer': manufacturer -> name
+      'manufacturer': manufacturer -> name,
+      'slug': slug.current,
       }
   }
 }

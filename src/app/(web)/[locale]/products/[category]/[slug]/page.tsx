@@ -122,10 +122,10 @@ export default async function Product({ params }: Props) {
             >
               {locale === 'en' ? 'Parameters' : 'Parametre'}
             </Heading>
-            <ParameterTable
+            {/* <ParameterTable
               machines={machines}
               seriesParameterGroups={seriesParameterGroups}
-            />
+            /> */}
           </Box>
         )}
       </Container>
