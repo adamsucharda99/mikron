@@ -105,24 +105,23 @@ export default function MachineParameterInput({
   }
 
   return (
-    <Stack spacing={6} {...elementProps}>
+    <Stack spacing={8} {...elementProps}>
       {seriesParameterGroups.map((group, index) => (
         <Box key={index} borderLeft='2px' pl={4} py={2} borderColor='gray.300'>
-          <Box>
-            <Text
-              fontWeight='bold'
-              textTransform='uppercase'
-              fontSize='sm'
-              color='gray.500'
-            >
-              {group.label[defaultLocale]}
-            </Text>
-          </Box>
-          <Stack spacing={2} mt={2}>
+          {Object.values(group.label).some((value) => value) && (
+            <Box>
+              <Text fontWeight='medium' color='gray.800'>
+                {group.label[defaultLocale] ||
+                  Object.entries(group.label).find(([key, value]) => value)![1]}
+              </Text>
+            </Box>
+          )}
+          <Stack spacing={2} mt={4}>
             {group.seriesParameters.map((parameter) => (
               <FormControl key={parameter.id}>
                 <FormLabel fontSize='sm' color='gray.700'>
-                  {parameter.label[defaultLocale]}
+                  {parameter.label[defaultLocale] ||
+                    parameter.label[Object.keys(parameter.label)[0]]}
                 </FormLabel>
                 <InputGroup size='sm'>
                   <Input

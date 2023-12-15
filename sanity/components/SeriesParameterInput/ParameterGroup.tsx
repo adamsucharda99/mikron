@@ -78,20 +78,24 @@ export default function ParameterGroup({
   };
 
   const handleDelete = async (groupKey: string) => {
-    const { _id: machineId } = await client.fetch(query, { key: groupKey });
+    const machine: { _id: string } = await client.fetch(query, {
+      key: groupKey,
+    });
 
-    const patchDocs = async (id: string): Promise<void> => {
-      await client
-        .patch(id, {
-          unset: [
-            `machineParameters[seriesParameterGroupKey == "${groupKey}"]`,
-          ],
-        })
-        .commit();
-    };
+    if (machine) {
+      const patchDocs = async (id: string): Promise<void> => {
+        await client
+          .patch(id, {
+            unset: [
+              `machineParameters[seriesParameterGroupKey == "${groupKey}"]`,
+            ],
+          })
+          .commit();
+      };
 
-    await patchDocs(machineId);
-    await patchDocs(`drafts.${machineId}`);
+      await patchDocs(machine._id);
+      await patchDocs(`drafts.${machine._id}`);
+    }
 
     setParameterGroups((current) =>
       current.filter((group) => group._key !== groupKey)

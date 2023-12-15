@@ -58,18 +58,22 @@ export default function Parameter({
   };
 
   const handleDelete = async (parameterId: string): Promise<void> => {
-    let { _id: machineId } = await client.fetch(query, { id: parameterId });
+    let machine: { _id: string } = await client.fetch(query, {
+      id: parameterId,
+    });
 
-    const patchDocs = async (id: string): Promise<void> => {
-      await client
-        .patch(id, {
-          unset: [`machineParameters[seriesParameterId == "${parameterId}"]`],
-        })
-        .commit();
-    };
+    if (machine) {
+      const patchDocs = async (id: string): Promise<void> => {
+        await client
+          .patch(id, {
+            unset: [`machineParameters[seriesParameterId == "${parameterId}"]`],
+          })
+          .commit();
+      };
 
-    await patchDocs(machineId);
-    await patchDocs(`drafts.${machineId}`);
+      await patchDocs(machine._id);
+      await patchDocs(`drafts.${machine._id}`);
+    }
 
     setParameterGroups((current) =>
       current.map((group) => ({
@@ -84,7 +88,11 @@ export default function Parameter({
   return (
     <Flex gap={2}>
       <Input
-        placeholder={parameter.label[defaultLocale] || 'Parameter'}
+        placeholder={
+          parameter.label[defaultLocale] ||
+          parameter.label[Object.keys(parameter.label)[0]] ||
+          'Parameter'
+        }
         flex={5}
         onChange={(e) => handleLabelChange(e.target.value, parameter.id, lang)}
         value={parameter.label[lang]}
