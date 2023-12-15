@@ -16,7 +16,7 @@ export default function SlugInput({
   useEffect(() => {
     if (nameFormValue) {
       const slug = slugify(nameFormValue, { lower: true, strict: true });
-      typeFormValue === 'series' ? setSlug(slug + '-series') : setSlug(slug);
+      setSlug(typeFormValue === 'series' ? slug + '-series' : slug);
 
       const newSlug: Slug = { _type: 'slug', current: slug };
       onChange(newSlug ? set(newSlug) : unset());
