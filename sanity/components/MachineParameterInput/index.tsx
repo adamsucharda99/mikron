@@ -100,8 +100,8 @@ export default function MachineParameterInput({
     });
   };
 
-  if (!seriesParameterGroups.length) {
-    return <div>kek</div>;
+  if (!seriesParameterGroups?.length) {
+    return null;
   }
 
   return (
