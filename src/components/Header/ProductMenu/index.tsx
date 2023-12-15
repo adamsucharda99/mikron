@@ -11,12 +11,10 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
-import {
-  ProductMenuDataChild,
-  ProductMenuDataParent,
-} from '../../../app/(web)/[locale]/productMenuData';
+import { ProductMenuDataChild, ProductMenuDataParent } from './productMenuData';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
+import slugify from 'slugify';
 
 interface Props {
   locale: string;
@@ -85,7 +83,13 @@ export default function ProductMenu({
       <ListHeading>{child?.name}</ListHeading>
       <List spacing={2}>
         {child?.series?.map((item) => (
-          <Link key={item._id} href={`/products/${child.name}/${item._id}`}>
+          <Link
+            key={item._id}
+            href={`/products/${slugify(child.name, {
+              lower: true,
+              strict: true,
+            })}/${item.slug}`}
+          >
             <ProductMenuItem manufacturer={item.manufacturer}>
               {`${item.name} ${locale === 'en' ? 'Series' : 'Séria'}`}
             </ProductMenuItem>

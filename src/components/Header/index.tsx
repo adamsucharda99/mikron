@@ -17,7 +17,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
-import { ProductMenuDataParent } from '../../app/(web)/[locale]/productMenuData';
+import { ProductMenuDataParent } from './ProductMenu/productMenuData';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';

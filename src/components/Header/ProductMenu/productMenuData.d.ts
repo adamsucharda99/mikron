@@ -11,5 +11,6 @@ export interface ProductMenuDataChild {
 export interface ProductMenuDataSeries {
   _id: string;
   name: string;
+  slug: string;
   manufacturer: string;
 }

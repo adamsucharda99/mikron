@@ -4,7 +4,7 @@ import { defineType, SchemaTypeDefinition } from 'sanity';
 export const localeString: SchemaTypeDefinition = defineType({
   name: 'localeString',
   type: 'object',
-  title: 'Localized string',
+  title: 'String',
   fieldsets: [
     {
       title: 'Translations',
