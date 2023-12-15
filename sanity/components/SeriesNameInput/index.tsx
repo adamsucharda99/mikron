@@ -2,7 +2,7 @@ import { Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
 import { InputProps, set, unset } from 'sanity';
 
-export default function SeriesInput({
+export default function SeriesNameInput({
   value,
   onChange,
   elementProps,

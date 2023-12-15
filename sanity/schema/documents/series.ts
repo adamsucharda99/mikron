@@ -1,5 +1,5 @@
 import { type SchemaTypeDefinition, defineType, defineField } from 'sanity';
-import SeriesInput from '../../components/SeriesNameInput';
+import SerieNameInput from '../../components/SeriesNameInput';
 import { imageOptions, referenceOptions } from '../options';
 import SeriesParameterInput from '../../components/SeriesParameterInput';
 
@@ -18,7 +18,7 @@ export const series: SchemaTypeDefinition = defineType({
       name: 'name',
       type: 'string',
       title: 'Name',
-      components: { input: SeriesInput },
+      components: { input: SerieNameInput },
     }),
     defineField({
       name: 'manufacturer',
