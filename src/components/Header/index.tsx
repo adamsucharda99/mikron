@@ -67,17 +67,17 @@ export default function Header({ locale, productMenuData }: Props) {
           justifyContent='space-between'
         >
           {/* Logo container */}
-          <Flex as={Link} href='/' alignItems='center' gap={3}>
+          <Flex as={Link} href='/' alignItems='center' gap={4}>
             <Box w={{ base: 8, md: 9 }}>
               <Image src={logo} alt='logo' />
             </Box>
             <Text
-              fontSize='2xl'
+              fontSize='xl'
               textTransform='uppercase'
               className={titilliumWeb.className}
               color='brand'
             >
-              Mikron
+              Mikron Slovakia
             </Text>
           </Flex>
 
