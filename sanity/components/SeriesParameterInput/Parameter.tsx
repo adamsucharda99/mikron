@@ -90,7 +90,7 @@ export default function Parameter({
       <Input
         placeholder={
           parameter.label[defaultLocale] ||
-          parameter.label[Object.keys(parameter.label)[0]] ||
+          Object.values(parameter.label).find((item) => item) ||
           'Parameter'
         }
         flex={5}

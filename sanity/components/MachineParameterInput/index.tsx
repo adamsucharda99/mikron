@@ -112,7 +112,7 @@ export default function MachineParameterInput({
             <Box>
               <Text fontWeight='medium' color='gray.800'>
                 {group.label[defaultLocale] ||
-                  Object.entries(group.label).find(([key, value]) => value)![1]}
+                  Object.values(group.label).find((item) => item)}
               </Text>
             </Box>
           )}
@@ -121,7 +121,7 @@ export default function MachineParameterInput({
               <FormControl key={parameter.id}>
                 <FormLabel fontSize='sm' color='gray.700'>
                   {parameter.label[defaultLocale] ||
-                    parameter.label[Object.keys(parameter.label)[0]]}
+                    Object.values(parameter.label).find((item) => item)}
                 </FormLabel>
                 <InputGroup size='sm'>
                   <Input

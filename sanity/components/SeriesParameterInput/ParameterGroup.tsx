@@ -112,7 +112,11 @@ export default function ParameterGroup({
               handleLabelChange(e.target.value, group._key, lang)
             }
             value={group.label[lang]}
-            placeholder={group.label[defaultLocale] || ''}
+            placeholder={
+              group.label[defaultLocale] ||
+              Object.values(group.label).find((item) => item) ||
+              ''
+            }
           />
         </FormControl>
         <Tooltip label='Delete group'>
