@@ -15,10 +15,15 @@ export default function SlugInput({
 
   useEffect(() => {
     if (nameFormValue) {
-      const slug = slugify(nameFormValue, { lower: true, strict: true });
-      setSlug(typeFormValue === 'series' ? slug + '-series' : slug);
+      const isSeries = typeFormValue === 'series';
 
-      const newSlug: Slug = { _type: 'slug', current: slug };
+      const slug = slugify(nameFormValue, { lower: true, strict: true });
+      setSlug(isSeries ? `${slug}-series` : slug);
+
+      const newSlug: Slug = {
+        _type: 'slug',
+        current: isSeries ? slug + '-series' : slug,
+      };
       onChange(newSlug ? set(newSlug) : unset());
     }
   }, [nameFormValue]);
