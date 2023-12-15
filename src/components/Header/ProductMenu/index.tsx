@@ -11,13 +11,16 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { MdArrowBack } from 'react-icons/md';
-import { ProductMenuData } from '../../../app/(web)/[locale]/productMenuData';
+import {
+  ProductMenuDataChild,
+  ProductMenuDataParent,
+} from '../../../app/(web)/[locale]/productMenuData';
 import ListHeading from './ListHeading';
 import ProductMenuItem from './ProductMenuItem';
 
 interface Props {
   locale: string;
-  productMenuData: ProductMenuData;
+  productMenuData: ProductMenuDataParent[];
   isOpen: boolean;
   mobile?: true;
   setProductsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,95 +33,47 @@ export default function ProductMenu({
   mobile,
   setProductsOpen,
 }: Props) {
-  const [parent, setParent] = useState<string | null>('');
-  const [child, setChild] = useState<string | null>('');
-  const [manufacturer, setManufacturer] = useState<string | null>('');
-
-  const { categories, manufacturers, series } = productMenuData;
+  const [parent, setParent] = useState<ProductMenuDataParent | null>(null);
+  const [child, setChild] = useState<ProductMenuDataChild | null>(null);
 
   useEffect(() => {
     setParent(null);
     setChild(null);
-    setManufacturer(null);
   }, [isOpen]);
-
-  const getManufacturersByChild = (childSlug: string) => {
-    const seriesFromCategory = series.items.filter(
-      (item) => item.fields.category.fields.slug === childSlug
-    );
-
-    const manufacturerSlugs = seriesFromCategory.map(
-      (series) => series.fields.manufacturer.fields.slug
-    );
-
-    return manufacturers.items.filter((item) =>
-      manufacturerSlugs.includes(item.fields.slug)
-    );
-  };
 
   const parentList = (
     <>
       <ListHeading>{locale === 'en' ? 'Products' : 'Produkty'}</ListHeading>
       <List spacing={2}>
-        {categories.items
-          .filter((item) => !item.fields.parent)
-          .reverse()
-          .map((item) => (
-            <ProductMenuItem
-              key={item.fields.slug}
-              onClick={() => {
-                setChild(null);
-                setManufacturer(null);
-                setParent(item.fields.slug);
-              }}
-              active={item.fields.slug === parent}
-            >
-              {item.fields.name}
-            </ProductMenuItem>
-          ))}
+        {productMenuData.map((item, index) => (
+          <ProductMenuItem
+            key={index}
+            onClick={() => {
+              setChild(null);
+              setParent(item);
+            }}
+            active={item === parent}
+          >
+            {item.name}
+          </ProductMenuItem>
+        ))}
       </List>
     </>
   );
 
   const childList = (
     <>
-      <ListHeading>
-        {
-          categories.items.find((item) => item.fields.slug === parent)?.fields
-            .name
-        }
-      </ListHeading>
+      <ListHeading>{parent?.name}</ListHeading>
       <List spacing={2}>
-        {categories.items
-          .filter((item) => item.fields.parent?.fields.slug === parent)
-          .reverse()
-          .map((item) => (
-            <ProductMenuItem
-              key={item.fields.slug}
-              onClick={() => {
-                setManufacturer(null);
-                setChild(item.fields.slug);
-              }}
-              active={item.fields.slug === child}
-            >
-              {item.fields.name}
-            </ProductMenuItem>
-          ))}
-      </List>
-    </>
-  );
-
-  const manufacturerList = (
-    <>
-      <ListHeading>{locale === 'en' ? 'Manufacturer' : 'Výrobca'}</ListHeading>
-      <List spacing={2}>
-        {getManufacturersByChild(child!).map((item) => (
+        {parent?.children?.map((item, index) => (
           <ProductMenuItem
-            key={item.fields.slug}
-            onClick={() => setManufacturer(item.fields.slug)}
-            active={item.fields.slug === manufacturer}
+            key={index}
+            onClick={() => {
+              setChild(item);
+            }}
+            active={item === child}
           >
-            {item.fields.name}
+            {item.name}
           </ProductMenuItem>
         ))}
       </List>
@@ -127,38 +82,22 @@ export default function ProductMenu({
 
   const seriesList = (
     <>
-      <ListHeading>
-        {
-          manufacturers.items.find((item) => item.fields.slug === manufacturer)
-            ?.fields.name
-        }
-      </ListHeading>
+      <ListHeading>{child?.name}</ListHeading>
       <List spacing={2}>
-        {series.items
-          .filter(
-            (item) =>
-              item.fields.category.fields.slug === child &&
-              item.fields.manufacturer.fields.slug === manufacturer
-          )
-          .map((item) => (
-            <Link
-              key={item.fields.slug}
-              href={`/products/${child}/${item.fields.slug}`}
-            >
-              <ProductMenuItem>
-                {`${item.fields.name} ${locale === 'en' ? 'Series' : 'Séria'}`}
-              </ProductMenuItem>
-            </Link>
-          ))}
+        {child?.series?.map((item) => (
+          <Link key={item._id} href={`/products/${child.name}/${item._id}`}>
+            <ProductMenuItem manufacturer={item.manufacturer}>
+              {`${item.name} ${locale === 'en' ? 'Series' : 'Séria'}`}
+            </ProductMenuItem>
+          </Link>
+        ))}
       </List>
     </>
   );
 
   if (mobile && setProductsOpen) {
     const handleBack = () =>
-      manufacturer
-        ? setManufacturer(null)
-        : child
+      child
         ? setChild(null)
         : parent
         ? setParent(null)
@@ -177,13 +116,7 @@ export default function ProductMenu({
           onClick={handleBack}
           variant='ghost'
         />
-        {manufacturer
-          ? seriesList
-          : child
-          ? manufacturerList
-          : parent
-          ? childList
-          : parentList}
+        {child ? seriesList : parent ? childList : parentList}
       </Flex>
     );
   }
@@ -191,14 +124,10 @@ export default function ProductMenu({
   return (
     <Flex bg='white' px={4} py={8} hideBelow='lg'>
       <Container maxW='container.xl'>
-        <Grid templateColumns='repeat(4, 1fr)' gap={4} flex={1}>
+        <Grid templateColumns='repeat(3, 1fr)' gap={4} flex={1}>
           <GridItem>{parentList}</GridItem>
-
           {parent && <GridItem>{childList}</GridItem>}
-
-          {child && <GridItem>{manufacturerList}</GridItem>}
-
-          {manufacturer && <GridItem>{seriesList}</GridItem>}
+          {child && <GridItem>{seriesList}</GridItem>}
         </Grid>
       </Container>
     </Flex>

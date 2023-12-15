@@ -17,10 +17,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
+import { ProductMenuDataParent } from '../../app/(web)/[locale]/productMenuData';
 import LocaleSelect from './LocaleSelect';
 import NavItem from './NavItem';
 import ProductMenu from './ProductMenu';
-import { ProductMenuData } from '../../app/(web)/[locale]/productMenuData';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 
@@ -28,7 +28,7 @@ export const navbarHeight = { base: 20, md: 24 };
 
 interface Props {
   locale: string;
-  productMenuData: ProductMenuData;
+  productMenuData: ProductMenuDataParent[];
 }
 
 export default function Header({ locale, productMenuData }: Props) {

@@ -1,14 +1,28 @@
 import Footer from '@/components/Footer';
 import Header, { navbarHeight } from '@/components/Header';
-import { client } from '@/contentful';
 import { locales } from '@/i18n';
 import { Box } from '@chakra-ui/react';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
+import { groq } from 'next-sanity';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import { client } from '../../../../sanity/lib/client';
 import { Providers } from '../../providers';
-import { ProductMenuData } from './productMenuData';
+
+const query = groq`
+ *[_type == 'category' && !defined(parent)] {
+  'name': name[$locale],
+  'children': *[_type == 'category' && parent._ref == ^._id] {
+    'name': name[$locale],
+      'series': *[_type == 'series' && category._ref == ^._id] {
+      _id,  
+      name,
+      'manufacturer': manufacturer -> name
+      }
+  }
+}
+`;
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,21 +35,7 @@ export function generateStaticParams() {
 }
 
 export async function getProductMenuData(locale: string) {
-  const categories = await client.getEntries({
-    content_type: 'category',
-    locale,
-  });
-
-  const manufacturers = await client.getEntries({
-    content_type: 'manufacturer',
-  });
-
-  const series = await client.getEntries({
-    content_type: 'series',
-    locale,
-  });
-
-  return { categories, manufacturers, series };
+  return await client.fetch(query, { locale });
 }
 
 interface Props {
@@ -50,9 +50,7 @@ export default async function RootLayout({
   if (!locales.includes(locale as any)) notFound();
   unstable_setRequestLocale(locale);
 
-  const productMenuData = (await getProductMenuData(
-    locale
-  )) as unknown as ProductMenuData;
+  const productMenuData = await getProductMenuData(locale);
 
   return (
     <html lang={locale}>
