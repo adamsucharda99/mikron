@@ -100,7 +100,15 @@ export default async function Product({ params }: Props) {
                 {`${name} ${locale === 'en' ? 'Series' : 'Séria'}`}
               </Heading>
             </Flex>
-            {description && <Stack spacing={3} sx={{ li: { ml: 4 } }}></Stack>}
+            {description && (
+              <Stack spacing={3} sx={{ li: { ml: 4 } }}>
+                {description.map((block, index) => (
+                  <Text as={block.listItem ? 'li' : 'p'} key={index}>
+                    {block.children[0].text}
+                  </Text>
+                ))}
+              </Stack>
+            )}
             <Flex gap={3} mt={2}>
               <ContactModalButton locale={locale} />
               {catalogUrl && (
