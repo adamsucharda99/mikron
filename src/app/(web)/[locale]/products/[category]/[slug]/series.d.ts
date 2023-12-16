@@ -1,4 +1,5 @@
 export interface Series {
+  _id: string;
   name: string;
   manufacturer: string;
   imageUrl: string;
@@ -12,15 +13,19 @@ export interface Series {
 }
 
 export interface Machine {
+  _id: string;
   name: string;
   machineParameters: {
     _key: string;
     seriesParameterId: string;
     seriesParameterGroupKey: string;
+    value: string;
+    unit?: string;
   }[];
 }
 
 export interface SeriesParameterGroup {
+  _key: string;
   label: string;
   seriesParameters: {
     id: string;

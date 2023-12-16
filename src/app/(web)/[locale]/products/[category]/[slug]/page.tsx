@@ -25,16 +25,19 @@ const querySeries = groq`
 
 const querySeriesBySlug = groq`
   *[_type == 'series' && slug.current == $slug][0] {
+  _id,
   name,
   'manufacturer': manufacturer -> name,
   'imageUrl': image.asset -> url,
   'catalogUrl': catalog.asset -> url,
   'description': description[$locale],
   'machines': *[_type == 'machine' && series._ref == ^._id] {
+    _id,
     name,
     machineParameters[]
   },
   seriesParameterGroups[] {
+    _key,
     'label': label[$locale],
     seriesParameters[] {
       id,
@@ -87,7 +90,7 @@ export default async function Product({ params }: Props) {
           minH='50vh'
           as='section'
         >
-          <Image src={imageUrl} alt={name} />
+          <Image src={imageUrl} alt={name} width={450} height={450} />
           <Flex direction='column' gap={6} py={12}>
             <Flex direction='column'>
               <Text fontWeight='medium' color='gray.600'>
@@ -122,10 +125,10 @@ export default async function Product({ params }: Props) {
             >
               {locale === 'en' ? 'Parameters' : 'Parametre'}
             </Heading>
-            {/* <ParameterTable
+            <ParameterTable
               machines={machines}
               seriesParameterGroups={seriesParameterGroups}
-            /> */}
+            />
           </Box>
         )}
       </Container>

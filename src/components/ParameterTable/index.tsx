@@ -23,54 +23,54 @@ export default function ParameterTable({
 }: Props) {
   return (
     <TableContainer py={12}>
-      <Table variant='simple'>
+      <Table>
         <Thead>
           <Tr>
             <Th />
-            {machines.map((m) => (
-              <Th key={m.fields.name} fontSize='sm' textAlign='center'>
-                {m.fields.name}
+            {machines.map((machine) => (
+              <Th key={machine._id} textAlign='center'>
+                {machine.name}
               </Th>
             ))}
           </Tr>
         </Thead>
-        {machines[0].fields.parameters.parameterGroups.map((g, i) => (
-          <Tbody key={i}>
+        {seriesParameterGroups.map((group) => (
+          <Tbody key={group._key}>
             <Tr>
               <Td
                 textTransform='uppercase'
-                fontSize='xs'
+                fontWeight='bold'
+                fontSize='sm'
                 color='gray.500'
-                fontWeight='semibold'
               >
-                {g.label}
+                {group.label}
               </Td>
-              {machines.map((m, i) => (
-                <Td key={i} />
+              {machines.map((machine) => (
+                <Td key={machine._id} />
               ))}
             </Tr>
-            {g.parameters.map((p, i) => (
-              <Tr key={i}>
-                <Td
-                  textTransform='capitalize'
-                  fontSize='sm'
-                  fontWeight='medium'
-                  color='gray.700'
-                >
-                  {p.label}
+            {group.seriesParameters.map((parameter) => (
+              <Tr key={parameter.id}>
+                <Td fontWeight='medium' color='gray.700' fontSize='sm'>
+                  {parameter.label}
                 </Td>
-                {machines.map((m, i) => (
-                  <Td
-                    key={i}
-                    fontSize='sm'
-                    fontWeight='medium'
-                    textAlign='center'
-                  >
-                    {m.fields.parameters.parameterGroups
-                      .flatMap((group) => group.parameters)
-                      .find((param) => param.label === p.label)?.value || '—'}
-                  </Td>
-                ))}
+                {machines.map((machine) =>
+                  machine.machineParameters
+                    .filter(
+                      (machineParam) =>
+                        machineParam.seriesParameterId === parameter.id
+                    )
+                    .map((machineParam) => (
+                      <Td
+                        key={machineParam._key}
+                        fontSize='sm'
+                        textAlign='center'
+                      >
+                        {machineParam.value}
+                        {parameter.unit}
+                      </Td>
+                    ))
+                )}
               </Tr>
             ))}
           </Tbody>
