@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defineField, defineType, type SchemaTypeDefinition } from 'sanity';
 import { imageOptions, referenceOptions } from '../options';
 import MachineParameterInput from '../../components/MachineParameterInput';

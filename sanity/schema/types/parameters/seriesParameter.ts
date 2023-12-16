@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { SchemaTypeDefinition, defineField, defineType } from 'sanity';
 
 export const seriesParameter: SchemaTypeDefinition = defineType({

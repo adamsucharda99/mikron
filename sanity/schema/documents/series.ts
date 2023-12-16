@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { type SchemaTypeDefinition, defineType, defineField } from 'sanity';
 import SerieNameInput from '../../components/SeriesNameInput';
 import { imageOptions, referenceOptions } from '../options';

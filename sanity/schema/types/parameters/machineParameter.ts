@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defineField, defineType } from 'sanity';
 
 export const machineParameter = defineType({

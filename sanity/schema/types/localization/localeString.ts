@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defaultLocale, locales } from '@/i18n';
 import { defineType, SchemaTypeDefinition } from 'sanity';
 

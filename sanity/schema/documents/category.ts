@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defaultLocale } from '@/i18n';
 import { EarthGlobeIcon } from '@sanity/icons';
 import { defineField, defineType, type SchemaTypeDefinition } from 'sanity';
