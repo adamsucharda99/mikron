@@ -35,9 +35,8 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function getProductMenuData(locale: string) {
-  return await client.fetch(query, { locale });
-}
+const getProductMenuData = async (locale: string) =>
+  await client.fetch(query, { locale }, { next: { revalidate: 1 } });
 
 interface Props {
   children: React.ReactNode;
