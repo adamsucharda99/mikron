@@ -22,12 +22,14 @@ export const series: SchemaTypeDefinition = defineType({
       type: 'string',
       title: 'Name',
       components: { input: SerieNameInput },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
       components: { input: SlugInput },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'manufacturer',
@@ -35,6 +37,7 @@ export const series: SchemaTypeDefinition = defineType({
       title: 'Manufacturer',
       to: [{ type: 'manufacturer' }],
       options: referenceOptions,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'category',
@@ -45,6 +48,7 @@ export const series: SchemaTypeDefinition = defineType({
         ...referenceOptions,
         filter: 'defined(parent)',
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'image',
@@ -68,6 +72,7 @@ export const series: SchemaTypeDefinition = defineType({
       title: 'Series parameters',
       of: [{ type: 'seriesParameterGroup' }],
       components: { input: SeriesParameterInput },
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

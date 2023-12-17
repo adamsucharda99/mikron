@@ -13,6 +13,7 @@ export const machine: SchemaTypeDefinition = defineType({
       name: 'name',
       type: 'string',
       title: 'Name',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'series',
@@ -20,12 +21,14 @@ export const machine: SchemaTypeDefinition = defineType({
       title: 'Series',
       to: [{ type: 'series' }],
       options: referenceOptions,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'machineParameters',
       type: 'array',
       of: [{ type: 'machineParameter' }],
       components: { input: MachineParameterInput },
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
