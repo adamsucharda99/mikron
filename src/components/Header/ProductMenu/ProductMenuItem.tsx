@@ -38,9 +38,8 @@ export default function ProductMenuItem({
         {manufacturer && (
           <Text
             color='gray.600'
-            textTransform='uppercase'
             fontSize='sm'
-            fontWeight='bold'
+            fontWeight='semibold'
             h='full'
             bg='gray.100'
             px={2}
