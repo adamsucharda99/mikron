@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     domains: ['cdn.sanity.io'],
   },
+  reactStrictMode: false,
 };
 
 module.exports = withNextIntl(nextConfig);

@@ -68,18 +68,18 @@ export const series: SchemaTypeDefinition = defineType({
       title: 'Description',
     }),
     defineField({
-      name: 'machineOrder',
-      type: 'array',
-      title: 'Machine order',
-      of: [{ type: 'string' }],
-      components: { input: MachineOrderInput },
-    }),
-    defineField({
       name: 'seriesParameterGroups',
       type: 'array',
       title: 'Series parameters',
       of: [{ type: 'seriesParameterGroup' }],
       components: { input: SeriesParameterInput },
+    }),
+    defineField({
+      name: 'machineOrder',
+      type: 'array',
+      title: 'Machine order',
+      of: [{ type: 'string' }],
+      components: { input: MachineOrderInput },
     }),
   ],
   preview: {
