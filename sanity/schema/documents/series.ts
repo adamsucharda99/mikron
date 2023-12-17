@@ -1,10 +1,11 @@
 // @ts-nocheck
 
-import { type SchemaTypeDefinition, defineType, defineField } from 'sanity';
+import { defineField, defineType, type SchemaTypeDefinition } from 'sanity';
+import MachineOrderInput from '../../components/MachineOrderInput';
 import SerieNameInput from '../../components/SeriesNameInput';
-import { imageOptions, referenceOptions } from '../options';
 import SeriesParameterInput from '../../components/SeriesParameterInput';
 import SlugInput from '../../components/SlugInput';
+import { imageOptions, referenceOptions } from '../options';
 
 export const series: SchemaTypeDefinition = defineType({
   name: 'series',
@@ -65,6 +66,13 @@ export const series: SchemaTypeDefinition = defineType({
       name: 'description',
       type: 'localeBlock',
       title: 'Description',
+    }),
+    defineField({
+      name: 'machineOrder',
+      type: 'array',
+      title: 'Machine order',
+      of: [{ type: 'string' }],
+      components: { input: MachineOrderInput },
     }),
     defineField({
       name: 'seriesParameterGroups',
