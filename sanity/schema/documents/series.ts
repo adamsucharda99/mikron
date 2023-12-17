@@ -78,7 +78,7 @@ export const series: SchemaTypeDefinition = defineType({
       name: 'machineOrder',
       type: 'array',
       title: 'Machine order',
-      of: [{ type: 'string' }],
+      of: [{ type: 'object', fields: [{ name: 'name', type: 'string' }] }],
       components: { input: MachineOrderInput },
     }),
   ],

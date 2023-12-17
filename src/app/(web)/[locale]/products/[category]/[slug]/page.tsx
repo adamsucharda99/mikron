@@ -44,7 +44,8 @@ const querySeriesBySlug = groq`
       'label': label[$locale],
       unit
     }
-  }
+  },
+  machineOrder
 }
 `;
 
@@ -82,6 +83,7 @@ export default async function Product({ params }: Props) {
     description,
     machines,
     seriesParameterGroups,
+    machineOrder,
   } = await getSeries(slug, locale);
 
   return (
@@ -141,6 +143,7 @@ export default async function Product({ params }: Props) {
               machines={machines}
               seriesParameterGroups={seriesParameterGroups}
               locale={locale}
+              machineOrder={machineOrder}
             />
           </Box>
         )}

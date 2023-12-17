@@ -1,3 +1,5 @@
+import { MachineSortItem } from '../../../../../../../sanity/components/MachineOrderInput';
+
 export interface Series {
   _id: string;
   name: string;
@@ -10,6 +12,7 @@ export interface Series {
   }[];
   machines: Machine[];
   seriesParameterGroups: SeriesParameterGroup[];
+  machineOrder: MachineSortItem[];
 }
 
 export interface Machine {

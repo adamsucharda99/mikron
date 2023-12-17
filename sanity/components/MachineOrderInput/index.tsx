@@ -17,7 +17,7 @@ import {
 } from 'sanity';
 import { apiVersion } from '../../env';
 
-interface MachineSortItem {
+export interface MachineSortItem {
   _key: string;
   name: string;
 }

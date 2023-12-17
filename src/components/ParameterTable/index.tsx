@@ -12,18 +12,32 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
+import { MachineSortItem } from '../../../sanity/components/MachineOrderInput';
 
 interface Props {
   machines: Machine[];
   seriesParameterGroups: SeriesParameterGroup[];
   locale: string;
+  machineOrder: MachineSortItem[] | null;
 }
 
 export default function ParameterTable({
   machines,
   seriesParameterGroups,
   locale,
+  machineOrder,
 }: Props) {
+  const sortedMachines = machineOrder
+    ? machines.slice().sort((a, b) => {
+        const indexA = machineOrder.findIndex((item) => item._key === a._id);
+        const indexB = machineOrder.findIndex((item) => item._key === b._id);
+        return (
+          (indexA !== -1 ? indexA : Number.MAX_VALUE) -
+          (indexB !== -1 ? indexB : Number.MAX_VALUE)
+        );
+      })
+    : machines;
+
   return (
     <TableContainer py={12}>
       <Table>
@@ -33,8 +47,13 @@ export default function ParameterTable({
         <Thead>
           <Tr>
             <Th />
-            {machines.map((machine) => (
-              <Th key={machine._id} textAlign='center'>
+            {sortedMachines.map((machine) => (
+              <Th
+                key={machine._id}
+                textAlign='center'
+                fontSize='sm'
+                color='gray.600'
+              >
                 {machine.name}
               </Th>
             ))}
@@ -51,7 +70,7 @@ export default function ParameterTable({
               >
                 {group.label}
               </Td>
-              {machines.map((machine) => (
+              {sortedMachines.map((machine) => (
                 <Td key={machine._id} />
               ))}
             </Tr>
@@ -60,7 +79,7 @@ export default function ParameterTable({
                 <Td fontWeight='medium' color='gray.700' fontSize='sm'>
                   {parameter.label}
                 </Td>
-                {machines.map((machine) =>
+                {sortedMachines.map((machine) =>
                   machine.machineParameters
                     .filter(
                       (machineParam) =>
