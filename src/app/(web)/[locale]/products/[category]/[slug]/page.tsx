@@ -136,6 +136,7 @@ export default async function Product({ params }: Props) {
             <ParameterTable
               machines={machines}
               seriesParameterGroups={seriesParameterGroups}
+              locale={locale}
             />
           </Box>
         )}
