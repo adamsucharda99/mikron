@@ -56,6 +56,7 @@ export const series: SchemaTypeDefinition = defineType({
       type: 'image',
       title: 'Image',
       options: imageOptions,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'catalog',
