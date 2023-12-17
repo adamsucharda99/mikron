@@ -15,12 +15,6 @@ export const machine: SchemaTypeDefinition = defineType({
       title: 'Name',
     }),
     defineField({
-      name: 'image',
-      type: 'image',
-      title: 'Image',
-      options: imageOptions,
-    }),
-    defineField({
       name: 'series',
       type: 'reference',
       title: 'Series',
