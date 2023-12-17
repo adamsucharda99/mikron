@@ -72,7 +72,6 @@ export const series: SchemaTypeDefinition = defineType({
       title: 'Series parameters',
       of: [{ type: 'seriesParameterGroup' }],
       components: { input: SeriesParameterInput },
-      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

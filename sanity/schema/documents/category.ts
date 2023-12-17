@@ -22,7 +22,7 @@ export const category: SchemaTypeDefinition = defineType({
       type: 'localeString',
       title: 'Name',
       group: 'localized',
-      validation: (Rule) => Rule.required,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'parent',

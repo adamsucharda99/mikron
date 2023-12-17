@@ -28,7 +28,6 @@ export const machine: SchemaTypeDefinition = defineType({
       type: 'array',
       of: [{ type: 'machineParameter' }],
       components: { input: MachineParameterInput },
-      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
