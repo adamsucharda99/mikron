@@ -59,10 +59,14 @@ export async function generateStaticParams() {
 }
 
 async function getSeries(slug: string, locale: string) {
-  const series: Series = await client.fetch(querySeriesBySlug, {
-    slug,
-    locale,
-  });
+  const series: Series = await client.fetch(
+    querySeriesBySlug,
+    {
+      slug,
+      locale,
+    },
+    { next: { revalidate: 1 } }
+  );
 
   return series ? series : notFound();
 }
