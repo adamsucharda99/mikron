@@ -39,7 +39,7 @@ export default function ParameterTable({
     : machines;
 
   return (
-    <TableContainer overflowY='auto' maxH='75vh'>
+    <TableContainer overflowY={{ lg: 'auto' }} maxH={{ lg: '75vh' }}>
       <Table size='sm'>
         <Thead
           position='sticky'
