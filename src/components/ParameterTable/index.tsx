@@ -58,7 +58,7 @@ export default function ParameterTable({
           }}
         >
           <Tr>
-            <Th />
+            <Th bg='white' position={{ lg: 'sticky' }} left={0} />
             {sortedMachines.map((machine) => (
               <Th
                 key={machine._id}
