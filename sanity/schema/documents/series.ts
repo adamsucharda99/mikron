@@ -69,6 +69,12 @@ export const series: SchemaTypeDefinition = defineType({
       title: 'Description',
     }),
     defineField({
+      name: 'videos',
+      type: 'array',
+      title: 'Videos',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
       name: 'seriesParameterGroups',
       type: 'array',
       title: 'Series parameters',

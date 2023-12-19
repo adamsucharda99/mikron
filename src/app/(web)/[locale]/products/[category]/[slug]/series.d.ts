@@ -13,6 +13,7 @@ export interface Series {
   machines: Machine[];
   seriesParameterGroups: SeriesParameterGroup[];
   machineOrder: MachineSortItem[];
+  videos?: string[];
 }
 
 export interface Machine {

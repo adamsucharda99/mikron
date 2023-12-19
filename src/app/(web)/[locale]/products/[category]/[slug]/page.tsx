@@ -2,6 +2,7 @@ import ContactModalButton from '@/components/ContactModalButton';
 import ParameterTable from '@/components/ParameterTable';
 import { Link } from '@/navigation';
 import {
+  AspectRatio,
   Box,
   Button,
   Container,
@@ -45,7 +46,8 @@ const querySeriesBySlug = groq`
       unit
     }
   },
-  machineOrder
+  machineOrder,
+  videos
 }
 `;
 
@@ -84,6 +86,7 @@ export default async function Product({ params }: Props) {
     machines,
     seriesParameterGroups,
     machineOrder,
+    videos,
   } = await getSeries(slug, locale);
 
   return (
@@ -127,6 +130,27 @@ export default async function Product({ params }: Props) {
             </Flex>
           </Flex>
         </SimpleGrid>
+
+        {videos && (
+          <SimpleGrid
+            columns={{ base: 1, lg: videos.length }}
+            spacing={4}
+            py={12}
+          >
+            {videos.map((video) => (
+              <AspectRatio ratio={16 / 9} key={video}>
+                <iframe
+                  src={video}
+                  title='YouTube video player'
+                  // @ts-ignore
+                  frameborder='0'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                  allowfullscreen
+                ></iframe>
+              </AspectRatio>
+            ))}
+          </SimpleGrid>
+        )}
 
         {machines.length > 0 && (
           <Box py={8}>
