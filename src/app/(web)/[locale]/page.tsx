@@ -62,12 +62,13 @@ export default function Home({ params: { locale } }: Props) {
           <SimpleGrid columns={{ lg: 2 }} spacing={8} alignItems='center'>
             <AspectRatio ratio={16 / 9}>
               <iframe
-                src='https://www.youtube.com/embed/5mVGR7ja1NE'
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                //@ts-ignore
-                allowfullscreen
+                src='https://www.youtube.com/embed/5mVGR7ja1NE?si=FSidgi3Ut4cN850C'
+                title='YouTube video player'
+                // @ts-ignore
                 frameborder='0'
-              />
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                allowfullscreen
+              ></iframe>
             </AspectRatio>
             <Flex direction='column' gap={4} color='gray.700'>
               <Text>
