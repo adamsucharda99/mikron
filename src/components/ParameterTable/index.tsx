@@ -3,8 +3,8 @@ import {
   SeriesParameterGroup,
 } from '@/app/(web)/[locale]/products/[category]/[slug]/series';
 import {
+  Divider,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -39,24 +39,37 @@ export default function ParameterTable({
     : machines;
 
   return (
-    <TableContainer py={12}>
-      <Table>
-        <TableCaption>
-          {locale === 'en' ? '*Optional' : '*Za príplatok'}
-        </TableCaption>
-        <Thead>
+    <TableContainer overflowY='auto' maxH='75vh'>
+      <Table size='sm'>
+        <Thead
+          position='sticky'
+          top={0}
+          bg='white'
+          h={14}
+          zIndex={2}
+          _after={{
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            width: 'full',
+            height: '4px',
+            background: 'gray.100',
+          }}
+        >
           <Tr>
             <Th />
             {sortedMachines.map((machine) => (
               <Th
                 key={machine._id}
                 textAlign='center'
-                fontSize='sm'
+                fontSize='small'
                 color='gray.600'
               >
                 {machine.name}
               </Th>
             ))}
+            <Divider borderColor='red' />
           </Tr>
         </Thead>
         {seriesParameterGroups.map((group) => (
@@ -64,19 +77,32 @@ export default function ParameterTable({
             <Tr>
               <Td
                 textTransform='uppercase'
-                fontWeight='bold'
-                fontSize='sm'
-                color='gray.500'
+                fontWeight='semibold'
+                fontSize='small'
+                color='gray.600'
+                position={{ lg: 'sticky' }}
+                left={0}
+                bg='gray.50'
               >
                 {group.label}
               </Td>
               {sortedMachines.map((machine) => (
-                <Td key={machine._id} />
+                <Td key={machine._id} bg='gray.50' />
               ))}
             </Tr>
-            {group.seriesParameters.map((parameter) => (
+            {group.seriesParameters.map((parameter, index) => (
               <Tr key={parameter.id}>
-                <Td fontWeight='medium' color='gray.700' fontSize='sm'>
+                <Td
+                  fontWeight='medium'
+                  color='gray.700'
+                  fontSize='small'
+                  position={{ lg: 'sticky' }}
+                  left={0}
+                  bg='white'
+                  borderRight='1px'
+                  borderColor='gray.200'
+                  display='flex'
+                >
                   {parameter.label}
                 </Td>
                 {sortedMachines.map((machine) =>
@@ -88,7 +114,7 @@ export default function ParameterTable({
                     .map((machineParam) => (
                       <Td
                         key={machineParam._key}
-                        fontSize='sm'
+                        fontSize='small'
                         textAlign='center'
                       >
                         {machineParam.value}
@@ -100,6 +126,20 @@ export default function ParameterTable({
             ))}
           </Tbody>
         ))}
+        <Tr>
+          <Td
+            h='40px'
+            color='gray.600'
+            position='sticky'
+            left={0}
+            fontSize='small'
+          >
+            {locale === 'en' ? '*Optional' : '*Za príplatok'}
+          </Td>
+          {sortedMachines.map((machine) => (
+            <Td key={machine._id} />
+          ))}
+        </Tr>
       </Table>
     </TableContainer>
   );
