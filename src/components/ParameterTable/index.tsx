@@ -48,11 +48,7 @@ export default function ParameterTable({
 
   return (
     <Box position='relative'>
-      <TableContainer
-        overflowY={{ lg: 'auto' }}
-        maxH={{ lg: '75vh' }}
-        ref={tableContainerRef}
-      >
+      <TableContainer overflowY={{ lg: 'auto' }} ref={tableContainerRef}>
         <Table size='sm'>
           <Thead
             position='sticky'
