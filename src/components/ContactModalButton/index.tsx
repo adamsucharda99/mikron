@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Container,
   Modal,
   ModalContent,
   ModalOverlay,
@@ -24,7 +25,8 @@ export default function ContactModalButton({ locale }: Props) {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent minW='80vw'>
+
+        <ModalContent maxW='container.xl' mx={6}>
           <ContactForm locale={locale} />
         </ModalContent>
       </Modal>
