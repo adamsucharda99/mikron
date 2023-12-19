@@ -26,14 +26,13 @@ export default function ScrollButton({ direction, tableContainerRef }: Props) {
     <IconButton
       aria-label='scroll-right'
       fontSize='40px'
-      color='blue.900'
-      bg='blue.100'
-      _hover={{ bg: 'blue.200' }}
-      _active={{ bg: 'blue.300' }}
+      color='rgba(30, 58, 138, 0.55)'
+      bg='rgba(219, 234, 254, 0.45)'
+      _hover={{ bg: 'rgba(219, 234, 254, 0.55)' }}
+      _active={{ bg: 'rgba(219, 234, 254, 0.6)' }}
       borderRadius='full'
       h={12}
       w={12}
-      opacity={0.6}
       icon={direction === 'left' ? <MdChevronLeft /> : <MdChevronRight />}
       onClick={handleScroll}
     />
