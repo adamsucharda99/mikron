@@ -158,8 +158,9 @@ export default async function Product({ params }: Props) {
               as='h3'
               fontSize='2xl'
               color='gray.700'
-              fontWeight='semibold'
+              fontWeight='medium'
               textAlign='center'
+              py={10}
             >
               {locale === 'en' ? 'Parameters' : 'Parametre'}
             </Heading>
