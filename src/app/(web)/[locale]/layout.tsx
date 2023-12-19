@@ -20,7 +20,7 @@ const query = groq`
       name,
       'manufacturer': manufacturer -> name,
       'slug': slug.current,
-      }
+      } | order(name asc)
   }
 }
 `;
