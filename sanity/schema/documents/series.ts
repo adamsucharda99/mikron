@@ -1,10 +1,10 @@
 // @ts-nocheck
 
 import { defineField, defineType, type SchemaTypeDefinition } from 'sanity';
-import MachineOrderInput from '../../components/MachineOrderInput';
-import SerieNameInput from '../../components/SeriesNameInput';
-import SeriesParameterInput from '../../components/SeriesParameterInput';
-import SlugInput from '../../components/SlugInput';
+import MachineOrderInput from '../../components/MachineOrderInput/MachineOrderInput';
+import SerieNameInput from '../../components/SeriesNameInput/SeriesNameInput';
+import SeriesParameterInput from '../../components/SeriesParameterInput/SeriesParameterInput';
+import SlugInput from '../../components/SlugInput/SlugInput';
 import { imageOptions, referenceOptions } from '../options';
 
 export const series: SchemaTypeDefinition = defineType({

@@ -1,6 +1,6 @@
-import ContactCard from '@/components/ContactCard';
-import ContactForm from '@/components/ContactForm';
-import ContactStack from '@/components/ContactStack';
+import ContactCard from '@/components/ContactCard/ContactCard';
+import ContactForm from '@/components/ContactForm/ContactForm';
+import ContactStack from '@/components/ContactStack/ContactStack';
 import { client } from '@/contentful';
 import { Link } from '@/navigation';
 import {

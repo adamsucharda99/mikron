@@ -8,7 +8,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import ContactForm from '../ContactForm';
+import ContactForm from '../ContactForm/ContactForm';
 
 interface Props {
   locale: string;

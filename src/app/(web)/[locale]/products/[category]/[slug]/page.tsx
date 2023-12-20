@@ -1,5 +1,5 @@
-import ContactModalButton from '@/components/ContactModalButton';
-import ParameterTable from '@/components/ParameterTable';
+import ContactModalButton from '@/components/ContactModalButton/ContactModalButton';
+import ParameterTable from '@/components/ParameterTable/ParameterTable';
 import { Link } from '@/navigation';
 import {
   AspectRatio,

@@ -17,7 +17,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { MachineSortItem } from '../../../sanity/components/MachineOrderInput';
+import { MachineSortItem } from '../../../sanity/components/MachineOrderInput/MachineOrderInput';
 import ScrollButton from './ScrollButton';
 
 interface Props {

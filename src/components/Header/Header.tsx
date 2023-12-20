@@ -18,9 +18,9 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { ProductMenuDataParent } from './ProductMenu/productMenuData';
-import LocaleSelect from './LocaleSelect';
+import LocaleSelect from './LocaleSelect/LocaleSelect';
 import NavItem from './NavItem';
-import ProductMenu from './ProductMenu';
+import ProductMenu from './ProductMenu/ProductMenu';
 
 const titilliumWeb = Titillium_Web({ subsets: ['latin'], weight: ['700'] });
 

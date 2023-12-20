@@ -1,5 +1,5 @@
-import Footer from '@/components/Footer';
-import Header, { navbarHeight } from '@/components/Header';
+import Footer from '@/components/Footer/Footer';
+import Header, { navbarHeight } from '@/components/Header/Header';
 import { locales } from '@/i18n';
 import { Box } from '@chakra-ui/react';
 import type { Metadata } from 'next';

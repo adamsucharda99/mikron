@@ -1,6 +1,6 @@
 import cncMachine from '@/../public/cnc-machine.jpg';
-import ContactForm from '@/components/ContactForm';
-import ContactStack from '@/components/ContactStack';
+import ContactForm from '@/components/ContactForm/ContactForm';
+import ContactStack from '@/components/ContactStack/ContactStack';
 import {
   AspectRatio,
   Box,

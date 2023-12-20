@@ -1,4 +1,4 @@
-import { MachineSortItem } from '../../../../../../../sanity/components/MachineOrderInput';
+import { MachineSortItem } from '../../../../../../../sanity/components/MachineOrderInput/MachineOrderInput';
 
 export interface Series {
   _id: string;

@@ -2,7 +2,7 @@
 
 import { defineField, defineType, type SchemaTypeDefinition } from 'sanity';
 import { imageOptions, referenceOptions } from '../options';
-import MachineParameterInput from '../../components/MachineParameterInput';
+import MachineParameterInput from '../../components/MachineParameterInput/MachineParameterInput';
 
 export const machine: SchemaTypeDefinition = defineType({
   name: 'machine',
