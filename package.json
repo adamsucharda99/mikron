@@ -11,12 +11,10 @@
   "dependencies": {
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
-    "@contentful/rich-text-react-renderer": "^15.19.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.21.1",
-    "contentful": "^10.6.14",
     "framer-motion": "^10.16.12",
     "next": "14.0.3",
     "next-intl": "^3.2.0",
