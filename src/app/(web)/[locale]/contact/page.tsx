@@ -1,7 +1,6 @@
 import ContactCard from '@/components/ContactCard/ContactCard';
 import ContactForm from '@/components/ContactForm/ContactForm';
 import ContactStack from '@/components/ContactStack/ContactStack';
-import { client } from '@/contentful';
 import { Link } from '@/navigation';
 import {
   Box,
@@ -13,6 +12,28 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import { groq } from 'next-sanity';
+import { client } from '../../../../../sanity/lib/client';
+import { ContactPage } from './contact';
+
+const query = groq`
+ *[_id == 'cab326df-5143-4392-afde-ea79617b7b9d'][0] {
+  pageBuilder[0] {
+    departments[] {
+      _key,
+      'department': department[$locale],
+      people[] {
+        _key,
+        name,
+        'position': position[$locale],
+        phone,
+        email,
+        region
+      }
+    }
+  }
+}
+`;
 
 interface Props {
   params: {
@@ -20,41 +41,13 @@ interface Props {
   };
 }
 
-interface ContactData {
-  departments: { items: { sys: { id: string }; fields: { name: string } }[] };
-  contacts: {
-    items: {
-      sys: { id: string };
-      fields: {
-        name: string;
-        department: { sys: { id: string }; fields: { name: string } };
-        position?: string;
-        phone?: string[];
-        email?: string;
-        region?: string;
-      };
-    }[];
-  };
-}
-
-async function getContactData(locale: string) {
-  const departments = await client.getEntries({
-    content_type: 'contactDepartment',
-    locale,
-  });
-
-  const contacts = await client.getEntries({
-    content_type: 'contact',
-    locale,
-  });
-
-  return { departments, contacts };
-}
+const getPageData = async (locale: string) =>
+  await client.fetch<ContactPage>(query, { locale });
 
 export default async function Contact({ params: { locale } }: Props) {
-  const { departments, contacts } = (await getContactData(
-    locale
-  )) as unknown as ContactData;
+  const data = await getPageData(locale);
+
+  const { departments } = data.pageBuilder;
 
   return (
     <main>
@@ -123,8 +116,8 @@ export default async function Contact({ params: { locale } }: Props) {
         </Stack>
 
         <Stack spacing={8} divider={<Divider />}>
-          {departments.items.reverse().map((department) => (
-            <Box key={department.sys.id}>
+          {departments.map((department) => (
+            <Box key={department._key}>
               <Heading
                 as='h3'
                 color='gray.500'
@@ -134,25 +127,19 @@ export default async function Contact({ params: { locale } }: Props) {
                 ml={2}
                 mb={6}
               >
-                {department.fields.name}
+                {department.department}
               </Heading>
               <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
-                {contacts.items
-                  .filter(
-                    (contact) =>
-                      contact.fields.department.sys.id === department.sys.id
-                  )
-                  .reverse()
-                  .map((contact) => (
-                    <ContactCard
-                      key={contact.sys.id}
-                      name={contact.fields.name}
-                      position={contact.fields.position}
-                      phone={contact.fields.phone}
-                      email={contact.fields.email}
-                      region={contact.fields.region}
-                    />
-                  ))}
+                {department.people.map((person) => (
+                  <ContactCard
+                    key={person._key}
+                    name={person.name}
+                    position={person.position}
+                    phone={person.phone}
+                    email={person.email}
+                    region={person.email}
+                  />
+                ))}
               </SimpleGrid>
             </Box>
           ))}
