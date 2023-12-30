@@ -102,16 +102,8 @@ export default async function Contact({ params: { locale } }: Props) {
 
           <Text fontSize='sm' color='gray.600'>
             {locale === 'en'
-              ? 'The Company MIKRON SLOVAKIA, s.r.o. is registered at'
-              : 'Spoločnosť MIKRON SLOVAKIA, s.r.o. je registrovaná na'}{' '}
-            <Link
-              style={{ textDecoration: 'underline' }}
-              href='https://www.orsr.sk/vypis.asp?ID=2854&SID=9&P=0'
-            >
-              {locale === 'en'
-                ? 'District court in  Bratislava I, insert No. 105389/B.'
-                : 'Okresnom súde v Bratislave I, vložka č. 105389/B.'}
-            </Link>
+              ? 'MIKON SLOVAKIA s.r.o. is registered in the Commercial Register of the Municipal Court in BRATISLAVA III, section: Sro (Limited Liability Companies), entry number: 105389/B.'
+              : 'MIKON SLOVAKIA s.r.o. je v Obchodnom registri Mestského súdu BRATISLAVA III., oddiel: Sro, vložka č.105389/B'}
           </Text>
         </Stack>
 
