@@ -8,6 +8,8 @@ import { localeString } from './schema/types/localization/localeString';
 import { machineParameter } from './schema/types/parameters/machineParameter';
 import { seriesParameter } from './schema/types/parameters/seriesParameter';
 import { seriesParameterGroup } from './schema/types/parameters/seriesParameterGroup';
+import { contactDepartments } from './schema/types/pageBuilder/contactDepartments';
+import { page } from './schema/documents/page';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -20,5 +22,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     seriesParameterGroup,
     seriesParameter,
     machineParameter,
+    page,
+    contactDepartments,
   ],
 };
